@@ -21,6 +21,9 @@
 		D9B9FADD2551BACB00A9C5A6 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B9FADC2551BACB00A9C5A6 /* RecipleaseUITests.swift */; };
 		D9D9CB492552A4620026C975 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9D9CB482552A4620026C975 /* ApiKeys.plist */; };
 		D9D9CB502552A9C50026C975 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9CB4F2552A9C50026C975 /* Utilities.swift */; };
+		D9D9CB59255318640026C975 /* RecipeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9CB58255318640026C975 /* RecipeServices.swift */; };
+		D9D9CB64255319C20026C975 /* EdamamDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9CB63255319C20026C975 /* EdamamDataStruct.swift */; };
+		D9D9CB6E255416320026C975 /* Edaman.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D9CB6D255416320026C975 /* Edaman.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		D9B9FADE2551BACB00A9C5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9D9CB482552A4620026C975 /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		D9D9CB4F2552A9C50026C975 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		D9D9CB58255318640026C975 /* RecipeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServices.swift; sourceTree = "<group>"; };
+		D9D9CB63255319C20026C975 /* EdamamDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdamamDataStruct.swift; sourceTree = "<group>"; };
+		D9D9CB6D255416320026C975 /* Edaman.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Edaman.json; sourceTree = "<group>"; };
 		F85F50CE79039B6CF0F52272 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +162,7 @@
 		D9B9FAD02551BACB00A9C5A6 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				D9B9FAD12551BACB00A9C5A6 /* RecipleaseTests.swift */,
+				D9D9CB72255416C60026C975 /* RecipeTests */,
 				D9B9FAD32551BACB00A9C5A6 /* Info.plist */,
 			);
 			path = RecipleaseTests;
@@ -190,6 +196,7 @@
 		D9D9CB462552A05E0026C975 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D9D9CB572553181D0026C975 /* Recipes */,
 				D9B9FAC02551BAC900A9C5A6 /* Reciplease.xcdatamodeld */,
 				D9D9CB4F2552A9C50026C975 /* Utilities.swift */,
 			);
@@ -209,6 +216,32 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D9D9CB572553181D0026C975 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				D9D9CB58255318640026C975 /* RecipeServices.swift */,
+				D9D9CB69255319E20026C975 /* EdamamDataStruct */,
+			);
+			path = Recipes;
+			sourceTree = "<group>";
+		};
+		D9D9CB69255319E20026C975 /* EdamamDataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				D9D9CB63255319C20026C975 /* EdamamDataStruct.swift */,
+			);
+			name = EdamamDataStruct;
+			sourceTree = "<group>";
+		};
+		D9D9CB72255416C60026C975 /* RecipeTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9B9FAD12551BACB00A9C5A6 /* RecipleaseTests.swift */,
+				D9D9CB6D255416320026C975 /* Edaman.json */,
+			);
+			name = RecipeTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -221,6 +254,7 @@
 				D9B9FAB12551BAC900A9C5A6 /* Frameworks */,
 				D9B9FAB22551BAC900A9C5A6 /* Resources */,
 				65375120135B9309B4CD33BC /* [CP] Embed Pods Frameworks */,
+				D9D9CB762555309E0026C975 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -328,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D9CB6E255416320026C975 /* Edaman.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +432,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reciplease-RecipleaseUITests/Pods-Reciplease-RecipleaseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D9D9CB762555309E0026C975 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		F824BA50B57810B2E5881D7A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +501,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9B9FAC22551BAC900A9C5A6 /* Reciplease.xcdatamodeld in Sources */,
+				D9D9CB59255318640026C975 /* RecipeServices.swift in Sources */,
+				D9D9CB64255319C20026C975 /* EdamamDataStruct.swift in Sources */,
 				D9B9FABC2551BAC900A9C5A6 /* ViewController.swift in Sources */,
 				D9B9FAB82551BAC900A9C5A6 /* AppDelegate.swift in Sources */,
 				D9D9CB502552A9C50026C975 /* Utilities.swift in Sources */,
