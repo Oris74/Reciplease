@@ -10,9 +10,11 @@
 		A565F7BF983C3ED956B52BB2 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E5ED29C5B2C7890AD7B982 /* Pods_Reciplease.framework */; };
 		B5B4AF8FB19164FA5B85CAE9 /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2445EC87DFB85DC40ACD9438 /* Pods_RecipleaseTests.framework */; };
 		D0A5156FEB1B6FBF9A4F5A79 /* Pods_Reciplease_RecipleaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F1A855F632CCBA5FD86DBC /* Pods_Reciplease_RecipleaseUITests.framework */; };
+		D9398FF02557F4EC009ED81C /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */; };
+		D9398FF52557F515009ED81C /* ListRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9398FF42557F515009ED81C /* ListRecipeViewController.swift */; };
+		D93990052558042D009ED81C /* SearchIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93990042558042D009ED81C /* SearchIngredientViewController.swift */; };
 		D9B9FAB82551BAC900A9C5A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B9FAB72551BAC900A9C5A6 /* AppDelegate.swift */; };
 		D9B9FABA2551BAC900A9C5A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B9FAB92551BAC900A9C5A6 /* SceneDelegate.swift */; };
-		D9B9FABC2551BAC900A9C5A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B9FABB2551BAC900A9C5A6 /* ViewController.swift */; };
 		D9B9FABF2551BAC900A9C5A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9B9FABD2551BAC900A9C5A6 /* Main.storyboard */; };
 		D9B9FAC22551BAC900A9C5A6 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9B9FAC02551BAC900A9C5A6 /* Reciplease.xcdatamodeld */; };
 		D9B9FAC42551BACB00A9C5A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9B9FAC32551BACB00A9C5A6 /* Assets.xcassets */; };
@@ -52,10 +54,12 @@
 		6AD9A92F3CF199D06AD4B893 /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
 		94E5ED29C5B2C7890AD7B982 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF87F0343EFCA08A924899 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		D9398FF42557F515009ED81C /* ListRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecipeViewController.swift; sourceTree = "<group>"; };
+		D93990042558042D009ED81C /* SearchIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIngredientViewController.swift; sourceTree = "<group>"; };
 		D9B9FAB42551BAC900A9C5A6 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B9FAB72551BAC900A9C5A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9B9FAB92551BAC900A9C5A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D9B9FABB2551BAC900A9C5A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D9B9FABE2551BAC900A9C5A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9B9FAC12551BAC900A9C5A6 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		D9B9FAC32551BACB00A9C5A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 		D9D9CB442552A0400026C975 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D9B9FAC52551BACB00A9C5A6 /* LaunchScreen.storyboard */,
 				D9B9FABD2551BAC900A9C5A6 /* Main.storyboard */,
 			);
 			path = View;
@@ -188,7 +193,9 @@
 		D9D9CB452552A0480026C975 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D9B9FABB2551BAC900A9C5A6 /* ViewController.swift */,
+				D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */,
+				D9398FF42557F515009ED81C /* ListRecipeViewController.swift */,
+				D93990042558042D009ED81C /* SearchIngredientViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,7 +213,6 @@
 		D9D9CB472552A0670026C975 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D9B9FAC52551BACB00A9C5A6 /* LaunchScreen.storyboard */,
 				D9B9FAC32551BACB00A9C5A6 /* Assets.xcassets */,
 				D9B9FAB72551BAC900A9C5A6 /* AppDelegate.swift */,
 				D9B9FAB92551BAC900A9C5A6 /* SceneDelegate.swift */,
@@ -502,11 +508,13 @@
 			files = (
 				D9B9FAC22551BAC900A9C5A6 /* Reciplease.xcdatamodeld in Sources */,
 				D9D9CB59255318640026C975 /* RecipeServices.swift in Sources */,
+				D9398FF02557F4EC009ED81C /* RecipeViewController.swift in Sources */,
+				D93990052558042D009ED81C /* SearchIngredientViewController.swift in Sources */,
 				D9D9CB64255319C20026C975 /* EdamamDataStruct.swift in Sources */,
-				D9B9FABC2551BAC900A9C5A6 /* ViewController.swift in Sources */,
 				D9B9FAB82551BAC900A9C5A6 /* AppDelegate.swift in Sources */,
 				D9D9CB502552A9C50026C975 /* Utilities.swift in Sources */,
 				D9B9FABA2551BAC900A9C5A6 /* SceneDelegate.swift in Sources */,
+				D9398FF52557F515009ED81C /* ListRecipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
