@@ -3,15 +3,15 @@
     <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
         <attribute name="urli" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Fridge" representedClassName="Fridge" syncable="YES" codeGenerationType="class">
-        <attribute name="ingredient" optional="YES" attributeType="String"/>
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Fridge" positionX="304.0546875" positionY="-118.4921875" width="128" height="58"/>
         <element name="Favorite" positionX="-69.70703125" positionY="-133.578125" width="128" height="58"/>
         <element name="Recipe" positionX="135" positionY="-108" width="128" height="58"/>
+        <element name="Ingredient" positionX="36" positionY="-117" width="128" height="58"/>
     </elements>
 </model>

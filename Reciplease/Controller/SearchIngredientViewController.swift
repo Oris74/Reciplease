@@ -6,24 +6,46 @@
 //
 
 import UIKit
+//import CoreData
 
-class SearchIngredientViewController: UIViewController {
+class SearchIngredientViewController: UIViewController, VCUtilities {
+    @IBOutlet weak var ingredientField: UITextField!
+
+    @IBOutlet weak var ingredientsList: UITextView!
+
+    @IBAction func addButtonTapped(_ sender: Any) {
+        guard let ingredient = ingredientField.text else { return }
+        Ingredient.addToFridge(new: ingredient)
+        ingredientField.text = ""
+        dislayIngredientsList()
+    }
+
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
+        Ingredient.emptyFridge()
+        dislayIngredientsList()
+    }
+
+    @IBAction func searchButtonTapped(_ sender: Any) {
+
+    }
 
     override func viewDidLoad() {
+        self.ingredientField.delegate = self
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        dislayIngredientsList()
+        super.viewDidAppear(animated)
     }
-    */
 
+   internal func dislayIngredientsList() {
+        var ingredientsText = ""
+        for ingredient in Ingredient.all {
+            if let name = ingredient.name {
+                ingredientsText += "- " + name + "\n"
+            }
+        }
+        ingredientsList.text = ingredientsText
+        }
 }

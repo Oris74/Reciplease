@@ -10,6 +10,11 @@
 		A565F7BF983C3ED956B52BB2 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E5ED29C5B2C7890AD7B982 /* Pods_Reciplease.framework */; };
 		B5B4AF8FB19164FA5B85CAE9 /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2445EC87DFB85DC40ACD9438 /* Pods_RecipleaseTests.framework */; };
 		D0A5156FEB1B6FBF9A4F5A79 /* Pods_Reciplease_RecipleaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F1A855F632CCBA5FD86DBC /* Pods_Reciplease_RecipleaseUITests.framework */; };
+		D9233CF6255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */; };
+		D9233CFE25598EBE00B96C32 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233CFD25598EBE00B96C32 /* Ingredient.swift */; };
+		D9233D0325598ED300B96C32 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233D0225598ED300B96C32 /* Recipe.swift */; };
+		D9233D09255997E100B96C32 /* VCUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233D08255997E100B96C32 /* VCUtilities.swift */; };
+		D9233D3D255A857200B96C32 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233D3C255A857200B96C32 /* DataBaseService.swift */; };
 		D9398FF02557F4EC009ED81C /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */; };
 		D9398FF52557F515009ED81C /* ListRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9398FF42557F515009ED81C /* ListRecipeViewController.swift */; };
 		D93990052558042D009ED81C /* SearchIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93990042558042D009ED81C /* SearchIngredientViewController.swift */; };
@@ -54,6 +59,11 @@
 		6AD9A92F3CF199D06AD4B893 /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
 		94E5ED29C5B2C7890AD7B982 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF87F0343EFCA08A924899 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchIngredientViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		D9233CFD25598EBE00B96C32 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		D9233D0225598ED300B96C32 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		D9233D08255997E100B96C32 /* VCUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCUtilities.swift; sourceTree = "<group>"; };
+		D9233D3C255A857200B96C32 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 		D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		D9398FF42557F515009ED81C /* ListRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecipeViewController.swift; sourceTree = "<group>"; };
 		D93990042558042D009ED81C /* SearchIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIngredientViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +140,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D9233D072559977400B96C32 /* ViewControllerUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				D9233D08255997E100B96C32 /* VCUtilities.swift */,
+			);
+			name = ViewControllerUtilities;
+			sourceTree = "<group>";
+		};
 		D9B9FAAB2551BAC900A9C5A6 = {
 			isa = PBXGroup;
 			children = (
@@ -155,10 +173,10 @@
 		D9B9FAB62551BAC900A9C5A6 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
-				D9D9CB472552A0670026C975 /* Supporting Files */,
 				D9D9CB462552A05E0026C975 /* Model */,
 				D9D9CB452552A0480026C975 /* Controller */,
 				D9D9CB442552A0400026C975 /* View */,
+				D9D9CB472552A0670026C975 /* Supporting Files */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -193,9 +211,11 @@
 		D9D9CB452552A0480026C975 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D9233D072559977400B96C32 /* ViewControllerUtilities */,
 				D9398FEF2557F4EC009ED81C /* RecipeViewController.swift */,
 				D9398FF42557F515009ED81C /* ListRecipeViewController.swift */,
 				D93990042558042D009ED81C /* SearchIngredientViewController.swift */,
+				D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +226,9 @@
 				D9D9CB572553181D0026C975 /* Recipes */,
 				D9B9FAC02551BAC900A9C5A6 /* Reciplease.xcdatamodeld */,
 				D9D9CB4F2552A9C50026C975 /* Utilities.swift */,
+				D9233CFD25598EBE00B96C32 /* Ingredient.swift */,
+				D9233D0225598ED300B96C32 /* Recipe.swift */,
+				D9233D3C255A857200B96C32 /* DataBaseService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -506,15 +529,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9233D09255997E100B96C32 /* VCUtilities.swift in Sources */,
 				D9B9FAC22551BAC900A9C5A6 /* Reciplease.xcdatamodeld in Sources */,
 				D9D9CB59255318640026C975 /* RecipeServices.swift in Sources */,
 				D9398FF02557F4EC009ED81C /* RecipeViewController.swift in Sources */,
+				D9233D0325598ED300B96C32 /* Recipe.swift in Sources */,
+				D9233CF6255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift in Sources */,
+				D9233D3D255A857200B96C32 /* DataBaseService.swift in Sources */,
 				D93990052558042D009ED81C /* SearchIngredientViewController.swift in Sources */,
 				D9D9CB64255319C20026C975 /* EdamamDataStruct.swift in Sources */,
 				D9B9FAB82551BAC900A9C5A6 /* AppDelegate.swift in Sources */,
 				D9D9CB502552A9C50026C975 /* Utilities.swift in Sources */,
 				D9B9FABA2551BAC900A9C5A6 /* SceneDelegate.swift in Sources */,
 				D9398FF52557F515009ED81C /* ListRecipeViewController.swift in Sources */,
+				D9233CFE25598EBE00B96C32 /* Ingredient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,7 +648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -675,7 +703,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

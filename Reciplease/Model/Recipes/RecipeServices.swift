@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-class RecipeService: Alamofire {
+class RecipeService {
     static let shared = RecipeService()
 
     private let edamamUrl = URL(string: "https://api.edamam.com/search?")!
 
     private var session = URLSession(configuration: .default)
 
-    private var task: [Location: URLSessionDataTask?] = [:]
+    //private var task: URLSessionDataTask = []
 
     private var appKey = "app_key"
     private var appId = "app_id"
@@ -23,8 +23,8 @@ class RecipeService: Alamofire {
     init(recipeSession: URLSession = URLSession(configuration: .default),
          apiId: String = "app_id", appKey: String = "app_key" ) {
         self.session = recipeSession
-        self.apiKey = apiKey
-        super.init()
+        self.appKey = appKey
+        //super.init()
     }
 /*
     ///Entry point for data importation  of weather module

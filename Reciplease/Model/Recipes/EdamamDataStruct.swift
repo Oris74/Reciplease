@@ -10,21 +10,29 @@ import Foundation
 // MARK: - Edamam
 ///API Edamam.com Data Structure
 struct Edaman: Codable {
-    let q: String
-    let from, to: Int
+    let query: String
+    let from, toQty: Int
     let more: Bool
     let count: Int
-    let hits: [Hit]
+    let hits: [HitSearch]
+    enum CodingKeys: String, CodingKey {
+        case query = "q"
+        case from
+        case toQty = "to"
+        case more
+        case count
+        case hits
+       }
 }
 
 // MARK: - Hit
-struct Hit: Codable {
-    let recipe: Recipe
+struct HitSearch: Codable {
+    let recipe: RecipeStruct
     let bookmarked, bought: Bool
 }
 
 // MARK: - Recipe
-struct Recipe: Codable {
+struct RecipeStruct: Codable {
     let uri: String
     let label: String
     let image: String
@@ -33,7 +41,7 @@ struct Recipe: Codable {
     let shareAs: String
     let yield: Int
     let dietLabels, healthLabels, cautions, ingredientLines: [String]
-    let ingredients: [Ingredient]
+    let ingredients: [IngredientRecipe]
     let calories, totalWeight: Double
     let totalTime: Int
     let totalNutrients, totalDaily: [String: Total]
@@ -59,14 +67,14 @@ struct Digest: Codable {
 
 enum Unit: String, Codable {
     case empty = "%"
-    case g = "g"
+    case gramme = "g"
     case kcal = "kcal"
-    case mg = "mg"
-    case µg = "µg"
+    case miligramme = "mg"
+    case microgramme = "µg"
 }
 
 // MARK: - Ingredient
-struct Ingredient: Codable {
+struct IngredientRecipe: Codable {
     let text: String
     let weight: Double
     let image: String?

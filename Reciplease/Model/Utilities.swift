@@ -24,7 +24,6 @@ class Utilities {
         let plist = NSDictionary(contentsOfFile: filePath!)
 
         let value = plist?.object(forKey: keyname) as? String
-
         return value
     }
 }
