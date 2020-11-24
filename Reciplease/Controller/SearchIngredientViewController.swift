@@ -9,43 +9,78 @@ import UIKit
 //import CoreData
 
 class SearchIngredientViewController: UIViewController, VCUtilities {
+    
+    private var fridgeContent: String
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ingredientField: UITextField!
-
     @IBOutlet weak var ingredientsList: UITextView!
-
-    @IBAction func addButtonTapped(_ sender: Any) {
+    
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        
         guard let ingredient = ingredientField.text else { return }
-        Ingredient.addToFridge(new: ingredient)
+        FridgeService.shared.getFoodTapped(new: ingredient)
         ingredientField.text = ""
-        dislayIngredientsList()
+        dislayFridgeList()
     }
-
+    
     @IBAction func clearButtonTapped(_ sender: UIButton) {
-        Ingredient.emptyFridge()
-        dislayIngredientsList()
+        FridgeService.shared.cleanFridge()
+        dislayFridgeList()
     }
-
+    
     @IBAction func searchButtonTapped(_ sender: Any) {
-
+        toggleActivityIndicator(shown: true)
+        Services.shared.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
+            guard let recipes = recipesRange else {
+                self?.manageErrors(errorCode: error)
+                return
+            }
+            self?.toggleActivityIndicator(shown: false)
+            
+            if recipes.count > 0 {
+                self?.presentList(with: recipes)
+            } else {
+                self?.manageErrors(errorCode: .noRecipeFound)
+            }
+        })
     }
-
+    
+    required init?(coder: NSCoder) {
+        FridgeService.shared.transfertIngredientsToFridge()
+        self.fridgeContent = ""
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         self.ingredientField.delegate = self
+        toggleActivityIndicator(shown: false)
         super.viewDidLoad()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
-        dislayIngredientsList()
+        self.fridgeContent = FridgeService.shared.fridge.stringOfIngredients
+        dislayFridgeList()
         super.viewDidAppear(animated)
     }
-
-   internal func dislayIngredientsList() {
+    
+    internal func dislayFridgeList() {
         var ingredientsText = ""
-        for ingredient in Ingredient.all {
-            if let name = ingredient.name {
-                ingredientsText += "- " + name + "\n"
-            }
+        let ingredients = FridgeService.shared.fridge.ingredients
+        for ingredient in ingredients {
+            ingredientsText += "- " + ingredient.name + "\n"
         }
         ingredientsList.text = ingredientsText
-        }
+    }
+    private func toggleActivityIndicator(shown: Bool) {
+        activityIndicator.isHidden = !shown
+    }
+    
+    private func presentList(with recipes: [RecipleaseStruct]) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let listRecipeViewController = storyboard.instantiateViewController(identifier: "ListRecipeViewController") as? ListRecipeViewController
+        else { return }
+        listRecipeViewController.recipes = recipes
+        self.navigationController?.pushViewController(listRecipeViewController, animated: true)
+    }
 }

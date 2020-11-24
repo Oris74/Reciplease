@@ -18,11 +18,11 @@ extension SearchIngredientViewController: UITextFieldDelegate {
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let ingredient = ingredientField.text else { return false }
 
-        Ingredient.addToFridge(new: ingredient)
+        FridgeService.shared.getFoodTapped(new: ingredient)
         ingredientField.text = ""
         textField.resignFirstResponder()
         dismissKeyboard()
-        dislayIngredientsList()
+        dislayFridgeList()
         return true
     }
 }

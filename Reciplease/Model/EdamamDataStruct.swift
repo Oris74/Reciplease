@@ -8,13 +8,14 @@
 import Foundation
 
 // MARK: - Edamam
-///API Edamam.com Data Structure
-struct Edaman: Codable {
+/// API Edamam.com Data Structure
+struct Edamam: Codable {
     let query: String
     let from, toQty: Int
     let more: Bool
     let count: Int
-    let hits: [HitSearch]
+    let hits: [Hit]?
+
     enum CodingKeys: String, CodingKey {
         case query = "q"
         case from
@@ -22,55 +23,68 @@ struct Edaman: Codable {
         case more
         case count
         case hits
-       }
+    }
 }
 
 // MARK: - Hit
-struct HitSearch: Codable {
-    let recipe: RecipeStruct
+struct Hit: Codable {
+    let recipeHits: Recipe?
     let bookmarked, bought: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case recipeHits = "recipe"
+        case bookmarked
+        case bought
+    }
 }
 
 // MARK: - Recipe
-struct RecipeStruct: Codable {
-    let uri: String
+struct Recipe: Codable {
+    let uriID: String
     let label: String
     let image: String
     let source: String
-    let url: String
+    let urlOrigin: String
     let shareAs: String
     let yield: Int
     let dietLabels, healthLabels, cautions, ingredientLines: [String]
-    let ingredients: [IngredientRecipe]
-    let calories, totalWeight: Double
-    let totalTime: Int
-    let totalNutrients, totalDaily: [String: Total]
-    let digest: [Digest]
+    let ingredients: [IngredientRecipe]?
+    let calories, totalWeight: Double?
+    let time: Int
+    let totalNutrients, totalDaily: [String: Total]?
+    let digest: [Digest]?
+
+    enum CodingKeys: String, CodingKey {
+        case uriID = "uri"
+        case label, image, source
+        case urlOrigin = "url"
+        case shareAs, yield, dietLabels
+        case healthLabels, cautions, calories
+        case totalWeight, ingredientLines
+        case time = "totalTime"
+        case ingredients
+        case totalNutrients, totalDaily
+        case digest
+    }
 }
 
-// MARK: - Digest
+ // MARK: - Digest
 struct Digest: Codable {
     let label, tag: String
     let schemaOrgTag: String?
     let total: Double
-    let hasRdi: Bool
+    let hasRdi: Bool?
     let daily: Double
     let unit: Unit
     let sub: [Digest]?
-
-    enum CodingKeys: String, CodingKey {
-        case label, tag, schemaOrgTag, total
-        case hasRdi
-        case daily, unit, sub
-    }
 }
 
 enum Unit: String, Codable {
     case empty = "%"
-    case gramme = "g"
+    case g = "g"
     case kcal = "kcal"
-    case miligramme = "mg"
-    case microgramme = "µg"
+    case mg = "mg"
+    case µg = "µg"
 }
 
 // MARK: - Ingredient
@@ -79,7 +93,6 @@ struct IngredientRecipe: Codable {
     let weight: Double
     let image: String?
 }
-
 // MARK: - Total
 struct Total: Codable {
     let label: String

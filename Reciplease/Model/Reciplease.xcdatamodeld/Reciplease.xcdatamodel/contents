@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
-        <attribute name="urli" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="StoredFavorite" representedClassName="StoredFavorite" syncable="YES" codeGenerationType="class">
+        <attribute name="uri" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Recipe" representedClassName="Recipe" syncable="YES" codeGenerationType="class">
-        <attribute name="title" optional="YES" attributeType="String"/>
+    <entity name="StoredIngredient" representedClassName="StoredIngredient" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Favorite" positionX="-69.70703125" positionY="-133.578125" width="128" height="58"/>
-        <element name="Recipe" positionX="135" positionY="-108" width="128" height="58"/>
-        <element name="Ingredient" positionX="36" positionY="-117" width="128" height="58"/>
+        <element name="StoredFavorite" positionX="-8892.74609375" positionY="-7118.99609375" width="128" height="44"/>
+        <element name="StoredIngredient" positionX="-9220.5390625" positionY="-7117.36328125" width="128" height="58"/>
     </elements>
 </model>
