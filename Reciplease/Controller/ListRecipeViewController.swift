@@ -13,6 +13,13 @@ class ListRecipeViewController: UIViewController, VCUtilities {
 
     @IBOutlet weak var tableview: UITableView!
 
+    @IBAction func segueRecipeViewController(_ sender: UIStoryboardSegue) {
+    
+        if let recipeViewController = sender.source as? RecipeViewController {
+            updateRecipe(recipeToUPD: recipeViewController.recipe)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableview.delegate = self
@@ -22,6 +29,14 @@ class ListRecipeViewController: UIViewController, VCUtilities {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableview.reloadData()
+    }
+
+    func updateRecipe(recipeToUPD: RecipleaseStruct) {
+        for (index, recipe) in recipes.enumerated() {
+            if recipe.id == recipeToUPD.id {
+                recipes[index].favorite = recipeToUPD.favorite
+            }
+        }
     }
 }
 

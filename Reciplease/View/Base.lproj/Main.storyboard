@@ -36,7 +36,7 @@
         <!--FavoriteNavigation-->
         <scene sceneID="cys-qH-5FU">
             <objects>
-                <navigationController storyboardIdentifier="FavoriteNavigationController" title="FavotiteNavigation" id="B9k-Oc-PFU" userLabel="FavoriteNavigation" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FavoriteNavigationController" title="FavotiteNavigation" id="B9k-Oc-PFU" userLabel="FavoriteNavigation" customClass="FavoriteNavControllerViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" systemItem="favorites" id="r21-O9-34C">
                         <color key="badgeColor" red="0.23847404119999999" green="0.22757455709999999" blue="0.2273393869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
@@ -55,7 +55,7 @@
                         <color key="barTintColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
-                        <segue destination="CIv-3j-8dD" kind="relationship" relationship="rootViewController" id="whW-Jc-4TJ"/>
+                        <segue destination="CIv-3j-8dD" kind="relationship" relationship="rootViewController" id="zxH-G4-iHI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsH-Y9-g5h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -519,6 +519,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="0gA-mc-w23">
+                        <barButtonItem key="backBarButtonItem" title="back" image="square.and.arrow.up.fill" catalog="system" style="plain" id="4tc-Of-Jp2">
+                            <connections>
+                                <segue destination="qVk-MA-QgB" kind="unwind" unwindAction="segueRecipeViewController:" id="giC-oe-YFR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="UEz-wd-4Eb">
                             <imageReference key="image" image="star.fill" catalog="system" symbolScale="large"/>
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p9c-uR-6Ju">
@@ -620,6 +625,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="noPhoto" width="1024" height="768"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="timer" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">

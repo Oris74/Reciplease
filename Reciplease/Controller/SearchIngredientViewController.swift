@@ -9,26 +9,26 @@ import UIKit
 //import CoreData
 
 class SearchIngredientViewController: UIViewController, VCUtilities {
-    
+
     private var fridgeContent: String
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ingredientField: UITextField!
     @IBOutlet weak var ingredientsList: UITextView!
-    
+
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        
+
         guard let ingredient = ingredientField.text else { return }
         FridgeService.shared.getFoodTapped(new: ingredient)
         ingredientField.text = ""
         dislayFridgeList()
     }
-    
+
     @IBAction func clearButtonTapped(_ sender: UIButton) {
         FridgeService.shared.cleanFridge()
         dislayFridgeList()
     }
-    
+
     @IBAction func searchButtonTapped(_ sender: Any) {
         toggleActivityIndicator(shown: true)
         Services.shared.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
@@ -37,7 +37,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
                 return
             }
             self?.toggleActivityIndicator(shown: false)
-            
+
             if recipes.count > 0 {
                 self?.presentList(with: recipes)
             } else {
@@ -45,25 +45,25 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
             }
         })
     }
-    
+
     required init?(coder: NSCoder) {
         FridgeService.shared.transfertIngredientsToFridge()
         self.fridgeContent = ""
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         self.ingredientField.delegate = self
         toggleActivityIndicator(shown: false)
         super.viewDidLoad()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         self.fridgeContent = FridgeService.shared.fridge.stringOfIngredients
         dislayFridgeList()
         super.viewDidAppear(animated)
     }
-    
+
     internal func dislayFridgeList() {
         var ingredientsText = ""
         let ingredients = FridgeService.shared.fridge.ingredients
@@ -75,7 +75,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     private func toggleActivityIndicator(shown: Bool) {
         activityIndicator.isHidden = !shown
     }
-    
+
     private func presentList(with recipes: [RecipleaseStruct]) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let listRecipeViewController = storyboard.instantiateViewController(identifier: "ListRecipeViewController") as? ListRecipeViewController

@@ -32,7 +32,7 @@ final class Services {//: RecipesService {
         ]
 
         APIServices.getAPIData(
-            endpointEdamamUrl, parameters, Edamam?.self, completionHandler: {(error, apidata) in
+            endpointEdamamUrl, parameters, Edamam?.self, completionHandler: {[weak self] (error, apidata) in
                 guard let recipes = apidata, let recipeHits = recipes.hits else {
                     return callback(error, nil)
                 }
@@ -42,8 +42,14 @@ final class Services {//: RecipesService {
 
                 for hits in recipeHits {
                     if let recipeAPI = hits.recipeHits {
-                        let recipe = self.bridgeEdamam(recipe: recipeAPI)
-                        recipeReciplease.append(recipe)
+                        if var recipe = self?.bridgeEdamam(recipe: recipeAPI) {
+                            StoredFavorite.isRecorded(idRecipe: recipe.id,  completionHandler: {(recorded) in
+                                if recorded {
+                                    recipe.favorite = true
+                                }
+                            })
+                            recipeReciplease.append(recipe)
+                        }
                     }
                 }
                 callback(nil, recipeReciplease)
@@ -64,27 +70,49 @@ final class Services {//: RecipesService {
             "&app_key": keyEdamamMap["app_key"]
         ]
         APIServices.getAPIData(
-            endpointEdamamUrl, parameters, Recipe?.self, completionHandler: { (error, apiData) in
+            endpointEdamamUrl, parameters, Recipe?.self, completionHandler: { [weak self] (error, apiData) in
                 guard let recipe = apiData  else {
                     return callback(error, nil)
                 }
-                callback(nil, self.bridgeEdamam(recipe: recipe))
+                callback(nil, self?.bridgeEdamam(recipe: recipe))
             })
     }
 
-    func bridgeEdamam(recipe: Recipe ) -> RecipleaseStruct {
-        let recipeReciplease = RecipleaseStruct.init(
-            id: recipe.uriID,
-            name: recipe.label,
-            image: recipe.image,
-            source: recipe.source,
-            origin: recipe.urlOrigin,
-            shareAs: recipe.shareAs,
-            portion: recipe.yield,
-            ingredients: recipe.ingredientLines,
-            time: recipe.time
-        )
-        return recipeReciplease
+    func getFavorites(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
+        let favorites: [Favorite] = StoredFavorite.all.map {
+            Favorite(idRecipe: $0.uri ?? "")
+        }
+        var recipes: [RecipleaseStruct] = []
+
+        for favorite in favorites {
+            getRecipe(idRecipe: favorite.idRecipe, callback: {(error, recipe) in
+                if var depackedRecipe = recipe {
+                    depackedRecipe.favorite = true
+                    recipes.append(depackedRecipe)
+                } else {
+                    callback(error, nil )
+                }
+            })
+        }
+        if recipes.isEmpty {
+            callback(.noFavoriteFound, nil)
+            return
+        }
+        callback(nil, recipes)
     }
 
+     func bridgeEdamam(recipe: Recipe ) -> RecipleaseStruct {
+            let recipeReciplease = RecipleaseStruct.init(
+                id: recipe.uriID,
+                name: recipe.label,
+                image: recipe.image,
+                source: recipe.source,
+                origin: recipe.urlOrigin,
+                shareAs: recipe.shareAs,
+                portion: recipe.yield,
+                ingredients: recipe.ingredientLines,
+                time: recipe.time
+            )
+            return recipeReciplease
+        }
 }

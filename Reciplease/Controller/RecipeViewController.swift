@@ -40,24 +40,36 @@ class RecipeViewController: UIViewController, VCUtilities {
         descriptionRecipe.text = recipe.ingredients.map { " - " + String($0)}.joined(separator: "\n")
         yieldRecipe.text = String(recipe.portion)
         timeRecipe.text = String(recipe.time)
+        
+        setFavoriteStatus()
     }
 
-    func toggleFavorite() {
-        if (recipe.favorite == false) {
+    private func setFavoriteStatus() {
+        switch recipe.favorite {
+        case true:
             favorite.tintColor = UIColor(red: 0.2937839031, green: 0.6239609122, blue: 0.4135306478, alpha: 1)
-            recipe.favorite = true
-
-        } else {
+        case false:
             favorite.tintColor = UIColor(named:"white")
-            recipe.favorite = false
         }
+    }
+    private func toggleFavorite() {
+
+        switch recipe.favorite {
+        case false:
+            recipe.favorite = true
+            StoredFavorite.save(recipe: recipe.id)
+        case true:
+            recipe.favorite = false
+            StoredFavorite.Delete(idRecipe: recipe.id)
+        }
+        setFavoriteStatus()
     }
 }
 extension RecipeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if segue.identifier == "segueToWebView" {
-             let recipeVC = segue.destination as! WebViewController
+        if segue.identifier == "segueToWebView" {
+            let recipeVC = segue.destination as! WebViewController
             recipeVC.recipeURL = recipe.urlOrigin
-         }
-     }
+        }
+    }
 }

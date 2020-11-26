@@ -14,6 +14,7 @@ class Utilities {
         case incorrectDataStruct = "la structure n'est pas conforme aux données API"
         case keyboardError = "veuillez saisir des valeurs numériques"
         case noRecipeFound = "aucune recette n'a été trouvée"
+        case noFavoriteFound = "aucun favoris n'est enregistré"
         case networkError = "Problème d'acces au site"
         case undefinedError = "erreur non definie"
     }

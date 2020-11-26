@@ -15,10 +15,10 @@ class APIServices {
         _ endpointApi: URL,
         _ parameters: [String:String?],
         _ apiStruct: T?.Type,
-        completionHandler : @escaping (Utilities.ManageError?, T?) -> Void) {
+        completionHandler : @escaping ( Utilities.ManageError?, T?) -> Void) {
         AF.request(endpointApi, method: .get, parameters: parameters)
             .validate()
-            .responseDecodable(of: apiStruct.self) { (response) in
+            .responseDecodable(of: apiStruct.self) {(response) in
                 switch response.result {
                 case .success:
                     guard let apiData = response.value else {
