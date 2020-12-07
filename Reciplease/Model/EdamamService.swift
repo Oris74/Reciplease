@@ -8,6 +8,8 @@
 import Foundation
 
 final class EdamamService : RecipesService {
+    var recipes = [RecipleaseStruct]()
+
     static var shared = EdamamService()
 
     private var index = 0
@@ -30,15 +32,12 @@ final class EdamamService : RecipesService {
             "from": String(index),
             "to": String(index + 10)
         ]
-
+        self.recipes = []
         APIServices.getAPIData(
             endpointEdamamUrl, parameters, Edamam.self, completionHandler: {[weak self] (error, apidata) in
-                guard let recipes = apidata, let recipeHits = recipes.hits else {
+                guard let depackedAPIData = apidata, let recipeHits = depackedAPIData.hits else {
                     return callback(error, nil)
                 }
-
-                var recipeReciplease: [RecipleaseStruct] = []
-                //let recipeReciplease = recipes.map { _ in try? Recipe(from: RecipleaseStruct.self as! Decoder) }
 
                 for hits in recipeHits {
                     if let recipeAPI = hits.recipeHits {
@@ -48,11 +47,11 @@ final class EdamamService : RecipesService {
                                     recipe.favorite = true
                                 }
                             })
-                            recipeReciplease.append(recipe)
+                            self?.recipes.append(recipe)
                         }
                     }
                 }
-                callback(nil, recipeReciplease)
+                callback(nil, self?.recipes)
                 return
             })
     }
@@ -70,22 +69,21 @@ final class EdamamService : RecipesService {
             "app_key": keyEdamamMap["app_key"]
         ]
         APIServices.getRawData(
-            endpointEdamamUrl, parameters, Result.self, completionHandler: { [weak self]  (error, data) in
+            endpointEdamamUrl, parameters, completionHandler: { [weak self]  (error, data) in
                 guard let json = data  else {
                     return callback(error, nil)
                 }
 
-                let decoder = JSONDecoder()
                 do {
+                    let decoder = JSONDecoder()
                     let recipe = try decoder.decode([Recipe].self, from: json)
-                    print(recipe) // decoded!*/
                     if recipe.count > 0 {
                         callback(nil, self?.bridgeEdamam(recipe: recipe[0]))
                     } else {
                         callback(error, nil)
                     }
                 } catch {
-                    print(error)
+                    callback(Utilities.ManageError.decodableIssue, nil)
                 }
             })
     }

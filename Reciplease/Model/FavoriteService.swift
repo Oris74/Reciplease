@@ -17,27 +17,30 @@ class FavoriteService {
         let favorites: [Favorite] = StoredFavorite.all.map {
             Favorite(idRecipe: $0.uri ?? "")
         }
-
+        print("nb favoris :\(favorites.count) " )
         let groupRecipe = DispatchGroup()
 
         for favorite in favorites {
             groupRecipe.enter()
-            recipesService.getRecipe(idRecipe: favorite.idRecipe, callback: {(error, recipe) in
+            DispatchQueue.global().async { [self] in            self.recipesService.getRecipe(idRecipe: favorite.idRecipe, callback: {[weak self](error, recipe) in
                 if var depackedRecipe = recipe {
                     depackedRecipe.favorite = true
-                    self.recipes.append(depackedRecipe)
+                    self?.recipes.append(depackedRecipe)
+                    print("******************* ")
                 }
+                groupRecipe.leave()
             })
-            groupRecipe.leave()
+
+            }
+
         }
 
-        groupRecipe.notify(qos: DispatchQoS.background, flags: DispatchWorkItemFlags.assignCurrentContext, queue: DispatchQueue.main) {
-            // what to do after all requests are done
-            if self.recipes.isEmpty {
+        groupRecipe.notify( queue: DispatchQueue.main) { [self] in
+            if recipes.isEmpty {
                 callback(.noFavoriteFound, nil)
                 return
             }
-            callback(nil, self.recipes)
-        }
+            callback(nil, recipes)
+         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class APIServices {
-    //static let shared = APIServices()
+    static let shared = APIServices()
 
     static func getAPIData<T:  Decodable>(
         _ endpointApi: URL,
@@ -19,8 +19,6 @@ class APIServices {
         AF.request(endpointApi, method: .get, parameters: parameters)
             .validate()
             .responseDecodable(of: apiStruct.self) {(response) in
-                print(response.request ?? "none")
-                print(response.request?.httpBody ?? "none")
                 switch response.result {
                 case .success:
                     guard let apiData = response.value else {
@@ -28,18 +26,16 @@ class APIServices {
                         return
                     }
                     completionHandler(nil, apiData )
-                case .failure(let error):
-                    print(error)
+                case .failure:
                     completionHandler(Utilities.ManageError.httpResponseError, nil)
                     return
                 }
             }
     }
 
-    static func getRawData<T:  Decodable>(
+    static func getRawData (
         _ endpointApi: URL,
         _ parameters: [String:String?],
-        _ apiStruct: T.Type,
         completionHandler : @escaping ( Utilities.ManageError?, Data?) -> Void) {
         AF.request(endpointApi, method: .get, parameters: parameters).response {(response) in
 
@@ -49,10 +45,8 @@ class APIServices {
                     completionHandler(Utilities.ManageError.incorrectDataStruct,nil )
                     return
                 }
-
                 completionHandler(nil, rawData )
-            case .failure(let error):
-                print(error)
+            case .failure:
                 completionHandler(Utilities.ManageError.httpResponseError, nil)
                 return
             }

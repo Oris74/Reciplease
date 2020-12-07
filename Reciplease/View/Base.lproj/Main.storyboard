@@ -75,15 +75,15 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="80" reuseIdentifier="RecipeCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="bHE-oG-UnY" customClass="RecipeTableViewCell" customModule="Reciplease">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="80" reuseIdentifier="RecipeCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="bHE-oG-UnY" customClass="RecipeTableViewCell" customModule="Reciplease">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bHE-oG-UnY" id="JpI-GW-usS">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" preservesSuperviewLayoutMargins="YES" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-Up-VaE" userLabel="ImageRecipe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-Up-VaE" userLabel="ImageRecipe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="371" id="0xJ-WE-qgi"/>
                                                         <constraint firstAttribute="height" constant="145" id="r5k-62-bxr"/>
@@ -144,7 +144,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DetailRecipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byF-50-1HB">
                                                     <rect key="frame" x="30" y="120" width="330" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="999" constant="350" id="C5A-jz-w9Y"/>
                                                         <constraint firstAttribute="height" constant="20" id="Qiw-dv-PgS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -154,10 +153,10 @@
                                                     <size key="shadowOffset" width="2" height="2"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleRecipe" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="374" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-S1-4bz">
-                                                    <rect key="frame" x="30" y="85" width="330" height="30"/>
+                                                    <rect key="frame" x="30" y="85" width="350" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="g0D-b8-lEv"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="999" constant="350" id="w52-bq-fMG"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="350" id="w52-bq-fMG"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -32,6 +32,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
 
     @IBAction func searchButtonTapped(_ sender: Any) {
         toggleActivityIndicator(shown: true)
+
         recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
             guard let recipes = recipesRange else {
                 self?.manageErrors(errorCode: error)
@@ -62,6 +63,8 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     override func viewDidAppear(_ animated: Bool) {
         self.fridgeContent = FridgeService.shared.fridge.stringOfIngredients
         dislayFridgeList()
+        FavoriteService.shared.recipes = []
+
         super.viewDidAppear(animated)
     }
 
@@ -78,10 +81,17 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     }
 
     private func presentList(with recipes: [RecipleaseStruct]) {
+
+        guard let listRecipeVC = getListRecipeVC() as? ListRecipeViewController else { return }
+
+        listRecipeVC.recipes = recipes
+        self.navigationController?.pushViewController(listRecipeVC, animated: true)
+    }
+
+    private func getListRecipeVC() -> UIViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let listRecipeViewController = storyboard.instantiateViewController(identifier: "ListRecipeViewController") as? ListRecipeViewController
-        else { return }
-        listRecipeViewController.recipes = recipes
-        self.navigationController?.pushViewController(listRecipeViewController, animated: true)
+        guard let listRecipeVC = storyboard.instantiateViewController(identifier: "ListRecipeViewController") as? ListRecipeViewController
+        else { return nil }
+        return listRecipeVC
     }
 }

@@ -16,7 +16,10 @@ extension VCUtilities {
     /// getting popup alert with description errors
     internal func presentAlert(message: String) {
         let alert = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: {_ in
+            //self.dismiss(animated: true, completion: nil)
+           // self.navigationController?.popViewController(animated: true)
+        })
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

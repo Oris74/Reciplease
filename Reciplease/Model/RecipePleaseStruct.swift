@@ -1,5 +1,5 @@
 //
-//  RecipeStruct.swift
+//  RecipepleaseStruct.swift
 //  
 //
 //  Created by Laurent Debeaujon on 18/11/2020.

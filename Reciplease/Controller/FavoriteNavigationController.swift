@@ -12,9 +12,17 @@ class FavoriteNavigationController: UINavigationController, VCUtilities {
     let favoriteService: FavoriteService = FavoriteService.shared
 
     override func viewWillAppear(_ animated: Bool) {
+        if let listRecipeViewController = self.viewControllers.first as? ListRecipeViewController {
+           // listRecipeViewController.recipes = []
+        }
+
+        super.viewWillAppear(animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         favoriteService.getRecipes(callback: { [weak self] (error, savedRecipes) in
             guard let depackedRecipes = savedRecipes,
-               error == nil else {
+                  error == nil, depackedRecipes.count > 0 else {
                 self?.manageErrors(errorCode: error)
                 return
             }
@@ -22,6 +30,7 @@ class FavoriteNavigationController: UINavigationController, VCUtilities {
                 listRecipeViewController.recipes = depackedRecipes
             }
         })
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
     }
+
 }

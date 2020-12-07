@@ -10,6 +10,7 @@ class Utilities {
     enum ManageError: String, Error {
         case apiKeyError = "Clef API non recupéré"
         case emptyText = "veuillez saisir un ou plusieurs ingredients séparés par une virgule"
+        case decodableIssue = "Recette non récupérable"
         case httpResponseError = "Réponse incorrect du serveur"
         case incorrectDataStruct = "la structure n'est pas conforme aux données API"
         case keyboardError = "veuillez saisir des valeurs numériques"
