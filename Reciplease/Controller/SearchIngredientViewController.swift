@@ -9,9 +9,10 @@ import UIKit
 //import CoreData
 
 class SearchIngredientViewController: UIViewController, VCUtilities {
+    let recipesService: RecipesService = EdamamService.shared
 
     private var fridgeContent: String
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ingredientField: UITextField!
     @IBOutlet weak var ingredientsList: UITextView!
@@ -31,7 +32,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
 
     @IBAction func searchButtonTapped(_ sender: Any) {
         toggleActivityIndicator(shown: true)
-        Services.shared.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
+        recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
             guard let recipes = recipesRange else {
                 self?.manageErrors(errorCode: error)
                 return

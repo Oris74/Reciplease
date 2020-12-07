@@ -8,24 +8,18 @@
 import UIKit
 
 class RecipeViewController: UIViewController, VCUtilities {
-
+    weak var delegate: ListRecipeViewController?
     var recipe: RecipleaseStruct!
 
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var imageRecipe: UIImageView!
     @IBOutlet weak var descriptionRecipe: UITextView!
-
     @IBOutlet weak var titleRecipe: UILabel!
-
     @IBOutlet weak var yieldRecipe: UILabel!
     @IBOutlet weak var timeRecipe: UILabel!
 
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         toggleFavorite()
-    }
-
-    @IBAction func directionButtonTapped(_ sender: UIButton) {
-        print("test")
     }
 
     override func viewDidLoad() {
@@ -40,8 +34,30 @@ class RecipeViewController: UIViewController, VCUtilities {
         descriptionRecipe.text = recipe.ingredients.map { " - " + String($0)}.joined(separator: "\n")
         yieldRecipe.text = String(recipe.portion)
         timeRecipe.text = String(recipe.time)
-        
+
         setFavoriteStatus()
+    }
+    override func didMove(toParent parent: UIViewController?) {
+        if let listRecipesVC = self.delegate {
+            for (index, recipeVC) in listRecipesVC.recipes.enumerated()
+            where self.recipe.id == recipeVC.id {
+                    listRecipesVC.recipes[index].favorite = self.recipe.favorite
+                }
+            }
+    }
+
+    private func toggleFavorite() {
+        switch self.recipe.favorite {
+        case false:
+            self.recipe.favorite = true
+            StoredFavorite.save(recipe: self.recipe.id)
+
+        case true:
+            recipe.favorite = false
+            StoredFavorite.Delete(idRecipe: self.recipe.id)
+        }
+        setFavoriteStatus()
+        updateParentList()
     }
 
     private func setFavoriteStatus() {
@@ -52,19 +68,17 @@ class RecipeViewController: UIViewController, VCUtilities {
             favorite.tintColor = UIColor(named:"white")
         }
     }
-    private func toggleFavorite() {
 
-        switch recipe.favorite {
-        case false:
-            recipe.favorite = true
-            StoredFavorite.save(recipe: recipe.id)
-        case true:
-            recipe.favorite = false
-            StoredFavorite.Delete(idRecipe: recipe.id)
+    func updateParentList() {
+        if let listRecipeVC = self.parent as? ListRecipeViewController {
+            for (index, recipe) in listRecipeVC.recipes.enumerated()
+            where recipe.id == self.recipe.id {
+                listRecipeVC.recipes[index].favorite = self.recipe.favorite
+            }
         }
-        setFavoriteStatus()
     }
 }
+
 extension RecipeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToWebView" {

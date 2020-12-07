@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class Services {//: RecipesService {
+final class EdamamService : RecipesService {
+    static var shared = EdamamService()
 
-    static let shared = Services()
     private var index = 0
 
     private let endpointEdamamUrl = URL(string:"https://api.edamam.com/search?")!
@@ -32,7 +32,7 @@ final class Services {//: RecipesService {
         ]
 
         APIServices.getAPIData(
-            endpointEdamamUrl, parameters, Edamam?.self, completionHandler: {[weak self] (error, apidata) in
+            endpointEdamamUrl, parameters, Edamam.self, completionHandler: {[weak self] (error, apidata) in
                 guard let recipes = apidata, let recipeHits = recipes.hits else {
                     return callback(error, nil)
                 }
@@ -54,7 +54,7 @@ final class Services {//: RecipesService {
                 }
                 callback(nil, recipeReciplease)
                 return
-                })
+            })
     }
 
     func getRecipe(idRecipe: String, callback: @escaping (Utilities.ManageError?, RecipleaseStruct?) -> Void) {
@@ -65,54 +65,45 @@ final class Services {//: RecipesService {
         }
 
         let parameters = [
-            "&r": idRecipe,
-            "&app_id": keyEdamamMap["app_id"],
-            "&app_key": keyEdamamMap["app_key"]
+            "r": idRecipe,
+            "app_id": keyEdamamMap["app_id"],
+            "app_key": keyEdamamMap["app_key"]
         ]
-        APIServices.getAPIData(
-            endpointEdamamUrl, parameters, Recipe?.self, completionHandler: { [weak self] (error, apiData) in
-                guard let recipe = apiData  else {
+        APIServices.getRawData(
+            endpointEdamamUrl, parameters, Result.self, completionHandler: { [weak self] (error, data) in
+                guard let json = data  else {
                     return callback(error, nil)
                 }
-                callback(nil, self?.bridgeEdamam(recipe: recipe))
-            })
-    }
+               // let decoder = JSONDecoder()
+                do {
+                    // let recipe = try decoder.decode(Result.self, from: json)
+                    let parsed = try JSONSerialization.jsonObject(with: json, options: .mutableContainers) as? NSArray
+                    var recipe: [Result] = []
+                    for obj in parsed! {
+                        let decodedObj = try Result(from: obj as! NSArray as! Decoder)
+                        recipe.append(decodedObj)
+                    }
 
-    func getFavorites(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
-        let favorites: [Favorite] = StoredFavorite.all.map {
-            Favorite(idRecipe: $0.uri ?? "")
-        }
-        var recipes: [RecipleaseStruct] = []
+                    print(recipe) // decoded!
 
-        for favorite in favorites {
-            getRecipe(idRecipe: favorite.idRecipe, callback: {(error, recipe) in
-                if var depackedRecipe = recipe {
-                    depackedRecipe.favorite = true
-                    recipes.append(depackedRecipe)
-                } else {
-                    callback(error, nil )
+                    callback(nil, self?.bridgeEdamam(recipe: recipe[0].results[0]))
+                } catch {
+                    print(error)
                 }
             })
-        }
-        if recipes.isEmpty {
-            callback(.noFavoriteFound, nil)
-            return
-        }
-        callback(nil, recipes)
     }
 
-     func bridgeEdamam(recipe: Recipe ) -> RecipleaseStruct {
-            let recipeReciplease = RecipleaseStruct.init(
-                id: recipe.uriID,
-                name: recipe.label,
-                image: recipe.image,
-                source: recipe.source,
-                origin: recipe.urlOrigin,
-                shareAs: recipe.shareAs,
-                portion: recipe.yield,
-                ingredients: recipe.ingredientLines,
-                time: recipe.time
-            )
-            return recipeReciplease
-        }
+    private func bridgeEdamam(recipe: Recipe ) -> RecipleaseStruct {
+        let recipeReciplease = RecipleaseStruct.init(
+            id: recipe.uriID,
+            name: recipe.label,
+            image: recipe.image,
+            source: recipe.source,
+            origin: recipe.urlOrigin,
+            portion: recipe.yield,
+            ingredients: recipe.ingredientLines,
+            time: recipe.time
+        )
+        return recipeReciplease
+    }
 }

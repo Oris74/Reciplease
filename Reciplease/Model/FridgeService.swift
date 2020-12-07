@@ -28,7 +28,6 @@ class FridgeService {
         addToFridge(ingredients: trimmedFoods, backup: true)
     }
 
-    ///
     private func addToFridge(ingredients:[Ingredient], backup: Bool) {
         for ingredient in ingredients {
             self.fridge.addIngredient(ingredient)

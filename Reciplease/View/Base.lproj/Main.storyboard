@@ -36,7 +36,7 @@
         <!--FavoriteNavigation-->
         <scene sceneID="cys-qH-5FU">
             <objects>
-                <navigationController storyboardIdentifier="FavoriteNavigationController" title="FavotiteNavigation" id="B9k-Oc-PFU" userLabel="FavoriteNavigation" customClass="FavoriteNavControllerViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FavoriteNavigationController" title="FavotiteNavigation" id="B9k-Oc-PFU" userLabel="FavoriteNavigation" customClass="FavoriteNavigationController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" systemItem="favorites" id="r21-O9-34C">
                         <color key="badgeColor" red="0.23847404119999999" green="0.22757455709999999" blue="0.2273393869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
@@ -75,7 +75,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="80" reuseIdentifier="RecipeCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="bHE-oG-UnY" customClass="RecipeTableViewCell" customModule="Reciplease">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="80" reuseIdentifier="RecipeCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="bHE-oG-UnY" customClass="RecipeTableViewCell" customModule="Reciplease">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bHE-oG-UnY" id="JpI-GW-usS">
@@ -467,8 +467,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="directionButtonTapped:" destination="qVk-MA-QgB" eventType="touchUpInside" id="Lof-eL-6uZ"/>
-                                    <action selector="directionButtonTapped:" destination="fv0-Pi-azx" eventType="touchUpInside" id="joO-te-ssK"/>
                                     <segue destination="EEr-hP-BBj" kind="show" identifier="segueToWebView" id="n8f-oh-aAo"/>
                                 </connections>
                             </button>
@@ -518,12 +516,7 @@
                             <constraint firstItem="HZ8-WZ-PwX" firstAttribute="leading" secondItem="Rhk-jV-XXd" secondAttribute="leading" id="nj1-0H-4i3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Reciplease" id="0gA-mc-w23">
-                        <barButtonItem key="backBarButtonItem" title="back" image="square.and.arrow.up.fill" catalog="system" style="plain" id="4tc-Of-Jp2">
-                            <connections>
-                                <segue destination="qVk-MA-QgB" kind="unwind" unwindAction="segueRecipeViewController:" id="giC-oe-YFR"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Reciplease" leftItemsSupplementBackButton="YES" id="0gA-mc-w23">
                         <barButtonItem key="rightBarButtonItem" id="UEz-wd-4Eb">
                             <imageReference key="image" image="star.fill" catalog="system" symbolScale="large"/>
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p9c-uR-6Ju">
@@ -539,9 +532,6 @@
                                 </connections>
                             </button>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="favoriteTapped:" destination="fv0-Pi-azx" id="fyO-tv-t24"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -554,7 +544,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5NE-3Z-bx4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="qVk-MA-QgB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-70" y="319"/>
         </scene>
@@ -625,7 +614,6 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="noPhoto" width="1024" height="768"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
-        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="timer" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">

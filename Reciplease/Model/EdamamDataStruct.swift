@@ -40,62 +40,49 @@ struct Hit: Codable {
 
 // MARK: - Recipe
 struct Recipe: Codable {
-    let uriID: String
-    let label: String
-    let image: String
-    let source: String
-    let urlOrigin: String
-    let shareAs: String
-    let yield: Int
-    let dietLabels, healthLabels, cautions, ingredientLines: [String]
-    let ingredients: [IngredientRecipe]?
-    let calories, totalWeight: Double?
-    let time: Int
-    let totalNutrients, totalDaily: [String: Total]?
-    let digest: [Digest]?
+    var uriID: String
+    var label: String
+    var image: String
+    var source: String
+    var urlOrigin: String
+    var yield: Int
+    var ingredientLines: [String]
+    var time: Int
 
+    init( uriID: String, label: String, image: String, source: String, urlOrigin: String, yield: Int, ingredientLines: [String], time: Int) {
+        self.uriID = uriID
+        self.label = label
+        self.image = image
+        self.source = source
+        self.urlOrigin = urlOrigin
+        self.yield = yield
+        self.ingredientLines = ingredientLines
+        self.time = time
+    }
+}
+
+extension Recipe {
     enum CodingKeys: String, CodingKey {
         case uriID = "uri"
         case label, image, source
         case urlOrigin = "url"
-        case shareAs, yield, dietLabels
-        case healthLabels, cautions, calories
-        case totalWeight, ingredientLines
+        case yield
+        case ingredientLines
         case time = "totalTime"
-        case ingredients
-        case totalNutrients, totalDaily
-        case digest
     }
-}
 
- // MARK: - Digest
-struct Digest: Codable {
-    let label, tag: String
-    let schemaOrgTag: String?
-    let total: Double
-    let hasRdi: Bool?
-    let daily: Double
-    let unit: Unit
-    let sub: [Digest]?
-}
+    init(from decoder: Decoder) throws {
+        let container  = try decoder.container(keyedBy: CodingKeys.self)
 
-enum Unit: String, Codable {
-    case empty = "%"
-    case g = "g"
-    case kcal = "kcal"
-    case mg = "mg"
-    case µg = "µg"
-}
+        let uriID  = try container.decode(String.self, forKey: .uriID)
+        let ingredientLines  = try container.decode([String].self, forKey: .ingredientLines)
+        let label = try container.decode(String.self, forKey: .label)
+        let yield = try container.decode(Int.self, forKey: .yield)
+        let time = try container.decode(Int.self, forKey: .time)
+        let image = try container.decode(String.self, forKey: .image)
+        let source = try container.decode(String.self, forKey: .source)
+        let urlOrigin = try container.decode(String.self, forKey: .urlOrigin)
 
-// MARK: - Ingredient
-struct IngredientRecipe: Codable {
-    let text: String
-    let weight: Double
-    let image: String?
-}
-// MARK: - Total
-struct Total: Codable {
-    let label: String
-    let quantity: Double
-    let unit: Unit
+        self.init( uriID: uriID, label: label, image: image, source: source, urlOrigin: urlOrigin, yield: yield, ingredientLines: ingredientLines, time: time)
+    }
 }

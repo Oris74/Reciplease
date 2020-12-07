@@ -15,13 +15,17 @@ extension ListRecipeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        if recipes != nil {
+            return recipes.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
-        let recipe = recipes[indexPath.row]
+        let recipe = recipes![indexPath.row]
 
         cell.titleRecipe.text = recipe.name
         cell.detailRecipe.text = recipe.ingredients.joined(separator: ", ")

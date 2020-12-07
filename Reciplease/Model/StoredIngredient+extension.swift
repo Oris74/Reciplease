@@ -39,7 +39,7 @@ extension StoredIngredient {
             try AppDelegate.viewContext.save()
 
         } catch {
-
+            print(error)
         }
     }
 }

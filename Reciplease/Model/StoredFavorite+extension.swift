@@ -45,7 +45,7 @@ extension StoredFavorite {
         // Configure Fetch Request
         request.predicate = NSPredicate(format: "uri=%@", idRecipe)
         request.includesPropertyValues = false
-        
+
         let items = try? AppDelegate.viewContext.fetch(request)
         guard let depackedItems = items else { return }
         for item in depackedItems {
