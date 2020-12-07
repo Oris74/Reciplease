@@ -13,21 +13,17 @@
 import Foundation
 
 struct Result: Codable {
-    let results: [Recipe]
+    var results: [Recipe]
 
-    enum Codingkeys: CodingKey { case results }
-    enum NodeKeys: CodingKey { case nodes }
+    enum RootKeys: CodingKey { case results }
 
-    init(from decoder: Decoder) throws {
-        let rootContainer  = try decoder.container(keyedBy: CodingKeys.self)
+  /*  init(from decoder: Decoder) throws {
+        let rootContainer  = try decoder.container(keyedBy: RootKeys.self)
 
-        let resultsNode  = try rootContainer.nestedContainer(keyedBy: NodeKeys.self, forKey: .results)
-        var nodes = try resultsNode.nestedUnkeyedContainer(forKey: .nodes)
-        var allResults: [Recipe] = []
-        while !nodes.isAtEnd {
-            let recipe = try nodes.decode(Recipe.self)
-            allResults += [recipe]
-        }
-        results = allResults
-    }
+       // let result = try rootContainer.nestedContainer(keyedBy: RootKeys.self, forKey: .results)
+       // var allResults: [Recipe] = []
+        let recipe = try rootContainer.decode(Recipe.self, forKey: .results)
+        //allResults.append(contentsOf: recipe)
+        results = recipe
+    }*/
  }

@@ -245,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				D96EF2A2256D71BB00DE8A97 /* StoredFavorite+extension.swift */,
+				D93DB13825779AC4007DAF75 /* FavoriteService.swift */,
 				D96EF29A256D716000DE8A97 /* Favorite.swift */,
 			);
 			name = Favorites;
@@ -386,7 +387,6 @@
 				D950F277255D7E0A007B74E6 /* APIServices.swift */,
 				D9F979362564432B00F304F4 /* RecipesService.swift */,
 				D9F979612567BB1B00F304F4 /* EdamamService.swift */,
-				D93DB13825779AC4007DAF75 /* FavoriteService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";

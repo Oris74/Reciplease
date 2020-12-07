@@ -70,23 +70,20 @@ final class EdamamService : RecipesService {
             "app_key": keyEdamamMap["app_key"]
         ]
         APIServices.getRawData(
-            endpointEdamamUrl, parameters, Result.self, completionHandler: { [weak self] (error, data) in
+            endpointEdamamUrl, parameters, Result.self, completionHandler: { [weak self]  (error, data) in
                 guard let json = data  else {
                     return callback(error, nil)
                 }
-               // let decoder = JSONDecoder()
+
+                let decoder = JSONDecoder()
                 do {
-                    // let recipe = try decoder.decode(Result.self, from: json)
-                    let parsed = try JSONSerialization.jsonObject(with: json, options: .mutableContainers) as? NSArray
-                    var recipe: [Result] = []
-                    for obj in parsed! {
-                        let decodedObj = try Result(from: obj as! NSArray as! Decoder)
-                        recipe.append(decodedObj)
+                    let recipe = try decoder.decode([Recipe].self, from: json)
+                    print(recipe) // decoded!*/
+                    if recipe.count > 0 {
+                        callback(nil, self?.bridgeEdamam(recipe: recipe[0]))
+                    } else {
+                        callback(error, nil)
                     }
-
-                    print(recipe) // decoded!
-
-                    callback(nil, self?.bridgeEdamam(recipe: recipe[0].results[0]))
                 } catch {
                     print(error)
                 }

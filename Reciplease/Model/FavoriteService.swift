@@ -10,6 +10,7 @@ import Foundation
 class FavoriteService {
     static let shared = FavoriteService()
 
+    var recipes: [RecipleaseStruct] = []
     let recipesService: RecipesService = EdamamService.shared
 
     func getRecipes(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
@@ -18,16 +19,13 @@ class FavoriteService {
         }
 
         let groupRecipe = DispatchGroup()
-        var recipes: [RecipleaseStruct] = []
 
         for favorite in favorites {
             groupRecipe.enter()
             recipesService.getRecipe(idRecipe: favorite.idRecipe, callback: {(error, recipe) in
                 if var depackedRecipe = recipe {
                     depackedRecipe.favorite = true
-                    recipes.append(depackedRecipe)
-                } else {
-                    callback(error, nil )
+                    self.recipes.append(depackedRecipe)
                 }
             })
             groupRecipe.leave()
@@ -35,11 +33,11 @@ class FavoriteService {
 
         groupRecipe.notify(qos: DispatchQoS.background, flags: DispatchWorkItemFlags.assignCurrentContext, queue: DispatchQueue.main) {
             // what to do after all requests are done
-            if recipes.isEmpty {
+            if self.recipes.isEmpty {
                 callback(.noFavoriteFound, nil)
                 return
             }
-            callback(nil, recipes)
+            callback(nil, self.recipes)
         }
     }
 }

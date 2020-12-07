@@ -62,7 +62,7 @@ struct Recipe: Codable {
 }
 
 extension Recipe {
-    enum CodingKeys: String, CodingKey {
+    enum RecipeKeys: String, CodingKey {
         case uriID = "uri"
         case label, image, source
         case urlOrigin = "url"
@@ -72,7 +72,7 @@ extension Recipe {
     }
 
     init(from decoder: Decoder) throws {
-        let container  = try decoder.container(keyedBy: CodingKeys.self)
+        let container  = try decoder.container(keyedBy: RecipeKeys.self)
 
         let uriID  = try container.decode(String.self, forKey: .uriID)
         let ingredientLines  = try container.decode([String].self, forKey: .ingredientLines)

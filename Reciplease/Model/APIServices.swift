@@ -49,6 +49,7 @@ class APIServices {
                     completionHandler(Utilities.ManageError.incorrectDataStruct,nil )
                     return
                 }
+
                 completionHandler(nil, rawData )
             case .failure(let error):
                 print(error)
