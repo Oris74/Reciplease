@@ -33,6 +33,7 @@ final class EdamamService : RecipesService {
             "to": String(index + 10)
         ]
         self.recipes = []
+
         APIServices.getAPIData(
             endpointEdamamUrl, parameters, Edamam.self, completionHandler: {[weak self] (error, apidata) in
                 guard let depackedAPIData = apidata, let recipeHits = depackedAPIData.hits else {

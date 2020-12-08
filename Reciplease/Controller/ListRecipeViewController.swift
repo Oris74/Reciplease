@@ -20,8 +20,8 @@ class ListRecipeViewController: UIViewController, VCUtilities {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         tableview.reloadData()
+        super.viewWillAppear(animated)
     }
 }
 
@@ -30,7 +30,7 @@ extension ListRecipeViewController {
         if segue.identifier == "segueToDetailledRecipe" {
             let recipeVC = segue.destination as! RecipeViewController
             if let selectedRecipe = self.tableview.indexPathForSelectedRow {
-                recipeVC.delegate = self
+                recipeVC.ListRecipeDelegate = self
                 recipeVC.recipe = recipes[selectedRecipe.row]
             } else { return }
         }

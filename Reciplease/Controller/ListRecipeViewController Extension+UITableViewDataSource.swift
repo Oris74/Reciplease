@@ -15,17 +15,15 @@ extension ListRecipeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if recipes != nil {
-            return recipes.count
-        } else {
-            return 0
-        }
+        guard let depackedRecipes = recipes else {
+            return 0 }
+        return depackedRecipes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
-        let recipe = recipes![indexPath.row]
+        let recipe = self.recipes![indexPath.row]
 
         cell.titleRecipe.text = recipe.name
         cell.detailRecipe.text = recipe.ingredients.joined(separator: ", ")
@@ -34,7 +32,11 @@ extension ListRecipeViewController: UITableViewDataSource {
 
         cell.time.text = String(recipe.time)
         cell.yield.text = String(recipe.portion)
-
+        if recipe.favorite {
+            setToGreen(button: cell.favorite)
+        } else {
+            setToWhite(button: cell.favorite)
+        }
         return cell
     }
 }

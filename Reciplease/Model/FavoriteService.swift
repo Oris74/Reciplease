@@ -13,26 +13,25 @@ class FavoriteService {
     var recipes: [RecipleaseStruct] = []
     let recipesService: RecipesService = EdamamService.shared
 
-    func getRecipes(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
+    func getRecipes(callback: @escaping (Utilities.ManageError?,    [RecipleaseStruct]?) -> Void) {
         let favorites: [Favorite] = StoredFavorite.all.map {
             Favorite(idRecipe: $0.uri ?? "")
         }
         print("nb favoris :\(favorites.count) " )
         let groupRecipe = DispatchGroup()
-
         for favorite in favorites {
             groupRecipe.enter()
-            DispatchQueue.global().async { [self] in            self.recipesService.getRecipe(idRecipe: favorite.idRecipe, callback: {[weak self](error, recipe) in
-                if var depackedRecipe = recipe {
-                    depackedRecipe.favorite = true
-                    self?.recipes.append(depackedRecipe)
-                    print("******************* ")
-                }
-                groupRecipe.leave()
-            })
-
+            DispatchQueue.main.async { [weak self] in
+                self?.recipesService.getRecipe(
+                    idRecipe:favorite.idRecipe,
+                    callback: {[weak self](error, recipe) in
+                        if var depackedRecipe = recipe {
+                            depackedRecipe.favorite = true
+                            self?.recipes.append(depackedRecipe)
+                        }
+                        groupRecipe.leave()
+                    })
             }
-
         }
 
         groupRecipe.notify( queue: DispatchQueue.main) { [self] in
@@ -41,6 +40,6 @@ class FavoriteService {
                 return
             }
             callback(nil, recipes)
-         }
+        }
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeViewController: UIViewController, VCUtilities {
-    weak var delegate: ListRecipeViewController?
+    weak var ListRecipeDelegate: ListRecipeViewController?
     var recipe: RecipleaseStruct!
 
     @IBOutlet weak var favorite: UIButton!
@@ -27,7 +27,7 @@ class RecipeViewController: UIViewController, VCUtilities {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
         titleRecipe.text = recipe.name
         timeRecipe.text = String(recipe.time)
         imageRecipe.load(url: recipe.image ?? "")
@@ -35,15 +35,12 @@ class RecipeViewController: UIViewController, VCUtilities {
         yieldRecipe.text = String(recipe.portion)
         timeRecipe.text = String(recipe.time)
 
-        setFavoriteStatus()
-    }
-    override func didMove(toParent parent: UIViewController?) {
-        if let listRecipesVC = self.delegate {
-            for (index, recipeVC) in listRecipesVC.recipes.enumerated()
-            where self.recipe.id == recipeVC.id {
-                    listRecipesVC.recipes[index].favorite = self.recipe.favorite
-                }
-            }
+        if recipe.favorite {
+            setToGreen(button: favorite)
+        } else {
+            setToWhite(button: favorite)
+        }
+        super.viewWillAppear(animated)
     }
 
     private func toggleFavorite() {
@@ -51,30 +48,22 @@ class RecipeViewController: UIViewController, VCUtilities {
         case false:
             self.recipe.favorite = true
             StoredFavorite.save(recipe: self.recipe.id)
-
+            setToGreen(button: favorite)
         case true:
             recipe.favorite = false
             StoredFavorite.Delete(idRecipe: self.recipe.id)
+            setToWhite(button: favorite)
         }
-        setFavoriteStatus()
         updateParentList()
     }
 
-    private func setFavoriteStatus() {
-        switch recipe.favorite {
-        case true:
-            favorite.tintColor = UIColor(red: 0.2937839031, green: 0.6239609122, blue: 0.4135306478, alpha: 1)
-        case false:
-            favorite.tintColor = UIColor(named:"white")
-        }
-    }
-
     func updateParentList() {
-        if let listRecipeVC = self.parent as? ListRecipeViewController {
+        if let listRecipeVC = self.ListRecipeDelegate {
             for (index, recipe) in listRecipeVC.recipes.enumerated()
             where recipe.id == self.recipe.id {
                 listRecipeVC.recipes[index].favorite = self.recipe.favorite
             }
+            listRecipeVC.tableview.reloadData()
         }
     }
 }

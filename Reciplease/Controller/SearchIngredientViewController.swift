@@ -16,6 +16,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ingredientField: UITextField!
     @IBOutlet weak var ingredientsList: UITextView!
+    @IBOutlet weak var searchButton: UIButton!
 
     @IBAction func addButtonTapped(_ sender: UIButton) {
 
@@ -30,15 +31,18 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
         dislayFridgeList()
     }
 
-    @IBAction func searchButtonTapped(_ sender: Any) {
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        sender.isEnabled = false
         toggleActivityIndicator(shown: true)
+        fridgeContent = FridgeService.shared.fridge.stringOfIngredients
 
         recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
+            
+            self?.toggleActivityIndicator(shown: false)
             guard let recipes = recipesRange else {
                 self?.manageErrors(errorCode: error)
                 return
             }
-            self?.toggleActivityIndicator(shown: false)
 
             if recipes.count > 0 {
                 self?.presentList(with: recipes)
@@ -61,10 +65,9 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.fridgeContent = FridgeService.shared.fridge.stringOfIngredients
+        searchButton.isEnabled = true
+        toggleActivityIndicator(shown: false)
         dislayFridgeList()
-        FavoriteService.shared.recipes = []
-
         super.viewDidAppear(animated)
     }
 
@@ -76,6 +79,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
         }
         ingredientsList.text = ingredientsText
     }
+
     private func toggleActivityIndicator(shown: Bool) {
         activityIndicator.isHidden = !shown
     }

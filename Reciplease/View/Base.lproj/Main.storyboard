@@ -72,7 +72,8 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LFT-BT-7UP">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.23847404119999999" green="0.22757455709999999" blue="0.2273393869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="80" reuseIdentifier="RecipeCell" rowHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="bHE-oG-UnY" customClass="RecipeTableViewCell" customModule="Reciplease">
@@ -164,6 +165,15 @@
                                                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="shadowOffset" width="2" height="2"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgG-Nn-QAn" userLabel="favorite">
+                                                    <rect key="frame" x="30" y="21" width="21" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="21" id="02w-As-qab"/>
+                                                        <constraint firstAttribute="height" constant="22" id="yPF-tH-7yj"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" image="heart.fill" catalog="system"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -177,13 +187,16 @@
                                                 <constraint firstItem="i9J-S1-4bz" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="10" id="S6w-pj-VVc"/>
                                                 <constraint firstItem="i9J-S1-4bz" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JpI-GW-usS" secondAttribute="trailingMargin" constant="-34" id="YRO-1t-Aap"/>
                                                 <constraint firstAttribute="trailing" secondItem="aHf-m0-doD" secondAttribute="trailing" constant="10" id="btu-LY-vyy"/>
+                                                <constraint firstItem="TgG-Nn-QAn" firstAttribute="top" secondItem="JpI-GW-usS" secondAttribute="topMargin" constant="10" id="hwc-IB-HVM"/>
                                                 <constraint firstItem="byF-50-1HB" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JpI-GW-usS" secondAttribute="trailingMargin" constant="-34" id="njJ-Fd-xAp"/>
                                                 <constraint firstAttribute="bottom" secondItem="byF-50-1HB" secondAttribute="bottom" constant="10" id="ooW-AW-jxm"/>
+                                                <constraint firstItem="TgG-Nn-QAn" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="10" id="x8H-qS-xzk"/>
                                                 <constraint firstItem="aHf-m0-doD" firstAttribute="top" secondItem="JpI-GW-usS" secondAttribute="top" constant="10" id="yAD-mC-O7P"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="detailRecipe" destination="byF-50-1HB" id="nfL-dU-dvT"/>
+                                            <outlet property="favorite" destination="TgG-Nn-QAn" id="O7I-aY-ez6"/>
                                             <outlet property="imageRecipe" destination="hXL-Up-VaE" id="wLX-Hr-G38"/>
                                             <outlet property="time" destination="yCP-FD-pzv" id="JRz-jw-Wnq"/>
                                             <outlet property="titleRecipe" destination="i9J-S1-4bz" id="Qtu-xw-EtB"/>
@@ -368,6 +381,7 @@
                         <outlet property="activityIndicator" destination="onP-1V-y5e" id="xPJ-mW-NTN"/>
                         <outlet property="ingredientField" destination="8h0-fD-r8w" id="IuU-gs-uSC"/>
                         <outlet property="ingredientsList" destination="FxP-fR-Ksz" id="gm4-WX-qpB"/>
+                        <outlet property="searchButton" destination="kH2-p0-fEo" id="bgb-uS-8Gg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYK-TN-xjZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -610,6 +624,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="noPhoto" width="1024" height="768"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>

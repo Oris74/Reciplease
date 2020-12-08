@@ -16,17 +16,16 @@ extension VCUtilities {
     /// getting popup alert with description errors
     internal func presentAlert(message: String) {
         let alert = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: {_ in
-            //self.dismiss(animated: true, completion: nil)
-           // self.navigationController?.popViewController(animated: true)
-        })
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+
     internal func dismissKeyboard() {
         view.endEditing(true)
     }
-    func manageErrors(errorCode: Utilities.ManageError?) {
+
+    internal func manageErrors(errorCode: Utilities.ManageError?) {
         guard let error = errorCode else {
             presentAlert(message: Utilities.ManageError.undefinedError.rawValue)
             return
@@ -34,4 +33,13 @@ extension VCUtilities {
         //popup display
         presentAlert(message: error.rawValue)
     }
+
+     internal func setToGreen(button: UIButton) {
+                button.tintColor = UIColor(red: 0.2937839031, green: 0.6239609122, blue: 0.4135306478, alpha: 1)
+    }
+
+     internal func setToWhite(button: UIButton) {
+            button.tintColor = UIColor(named:"white")
+    }
+    
 }
