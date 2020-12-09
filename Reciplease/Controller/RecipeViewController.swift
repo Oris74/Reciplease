@@ -8,7 +8,8 @@
 import UIKit
 
 class RecipeViewController: UIViewController, VCUtilities {
-    weak var ListRecipeDelegate: ListRecipeViewController?
+    weak var delegate: PassDataToVC?
+
     var recipe: RecipleaseStruct!
 
     @IBOutlet weak var favorite: UIButton!
@@ -19,7 +20,9 @@ class RecipeViewController: UIViewController, VCUtilities {
     @IBOutlet weak var timeRecipe: UILabel!
 
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
-        toggleFavorite()
+        self.recipe = toggleFavoriteStatus(recipe: self.recipe)
+        delegate?.sendToVC(updatedRecipe: self.recipe)
+        refreshFavoriteColor(button: favorite, recipe: self.recipe)
     }
 
     override func viewDidLoad() {
@@ -35,15 +38,12 @@ class RecipeViewController: UIViewController, VCUtilities {
         yieldRecipe.text = String(recipe.portion)
         timeRecipe.text = String(recipe.time)
 
-        if recipe.favorite {
-            setToGreen(button: favorite)
-        } else {
-            setToWhite(button: favorite)
-        }
+        refreshFavoriteColor(button: favorite, recipe: recipe)
+
         super.viewWillAppear(animated)
     }
 
-    private func toggleFavorite() {
+   /* private func toggleFavorite() {
         switch self.recipe.favorite {
         case false:
             self.recipe.favorite = true
@@ -54,18 +54,8 @@ class RecipeViewController: UIViewController, VCUtilities {
             StoredFavorite.Delete(idRecipe: self.recipe.id)
             setToWhite(button: favorite)
         }
-        updateParentList()
-    }
 
-    func updateParentList() {
-        if let listRecipeVC = self.ListRecipeDelegate {
-            for (index, recipe) in listRecipeVC.recipes.enumerated()
-            where recipe.id == self.recipe.id {
-                listRecipeVC.recipes[index].favorite = self.recipe.favorite
-            }
-            listRecipeVC.tableview.reloadData()
-        }
-    }
+    }*/
 }
 
 extension RecipeViewController {

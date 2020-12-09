@@ -10,36 +10,38 @@ import Foundation
 class FavoriteService {
     static let shared = FavoriteService()
 
-    var recipes: [RecipleaseStruct] = []
+    //var recipes: [RecipleaseStruct] = []
     let recipesService: RecipesService = EdamamService.shared
 
-    func getRecipes(callback: @escaping (Utilities.ManageError?,    [RecipleaseStruct]?) -> Void) {
+    func getRecipes(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
+        var recipes = [RecipleaseStruct]()
         let favorites: [Favorite] = StoredFavorite.all.map {
             Favorite(idRecipe: $0.uri ?? "")
         }
-        print("nb favoris :\(favorites.count) " )
+        var processingError: Utilities.ManageError?
         let groupRecipe = DispatchGroup()
         for favorite in favorites {
             groupRecipe.enter()
-            DispatchQueue.main.async { [weak self] in
-                self?.recipesService.getRecipe(
-                    idRecipe:favorite.idRecipe,
-                    callback: {[weak self](error, recipe) in
+
+            recipesService.getRecipe(
+                idRecipe:favorite.idRecipe,
+                callback: { (error, recipe) in
+                    DispatchQueue.main.async {
                         if var depackedRecipe = recipe {
                             depackedRecipe.favorite = true
-                            self?.recipes.append(depackedRecipe)
+                            recipes.append(depackedRecipe)
                         }
+                        processingError = error
                         groupRecipe.leave()
-                    })
-            }
+                    }
+                })
         }
-
-        groupRecipe.notify( queue: DispatchQueue.main) { [self] in
-            if recipes.isEmpty {
-                callback(.noFavoriteFound, nil)
-                return
-            }
-            callback(nil, recipes)
+        if (processingError == nil),
+           (recipes.count == 0) {
+            processingError = .noFavoriteFound
+        }
+        groupRecipe.notify( queue: DispatchQueue.main) {
+            callback(processingError, recipes)
         }
     }
 }

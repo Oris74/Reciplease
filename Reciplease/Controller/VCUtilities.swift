@@ -34,12 +34,25 @@ extension VCUtilities {
         presentAlert(message: error.rawValue)
     }
 
-     internal func setToGreen(button: UIButton) {
-                button.tintColor = UIColor(red: 0.2937839031, green: 0.6239609122, blue: 0.4135306478, alpha: 1)
+    internal func toggleFavoriteStatus(recipe: RecipleaseStruct) -> RecipleaseStruct {
+        var modifiedRecipe = recipe
+
+        switch modifiedRecipe.favorite {
+        case false:
+            modifiedRecipe.favorite = true
+            StoredFavorite.save(recipe: modifiedRecipe.id)
+        case true:
+            modifiedRecipe.favorite = false
+            StoredFavorite.Delete(idRecipe: modifiedRecipe.id)
+        }
+        return modifiedRecipe
     }
 
-     internal func setToWhite(button: UIButton) {
+    internal func refreshFavoriteColor(button: UIButton, recipe: RecipleaseStruct) {
+        if recipe.favorite {
+            button.tintColor = UIColor(red: 0.2937839031, green: 0.6239609122, blue: 0.4135306478, alpha: 1)
+        } else {
             button.tintColor = UIColor(named:"white")
+        }
     }
-    
 }

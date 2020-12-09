@@ -18,14 +18,12 @@ struct Recipe: Codable {
     var ingredientLines: [String]
     var time: Int
 
-    init( uriID: String, label: String, image: String, source: String, urlOrigin: String, yield: Int, ingredientLines: [String], time: Int) {
-        self.uriID = uriID
-        self.label = label
-        self.image = image
-        self.source = source
-        self.urlOrigin = urlOrigin
-        self.yield = yield
-        self.ingredientLines = ingredientLines
-        self.time = time
+    enum CodingKeys: String, CodingKey {
+        case uriID = "uri"
+        case label, image, source
+        case urlOrigin = "url"
+        case yield
+        case ingredientLines
+        case time = "totalTime"
     }
 }

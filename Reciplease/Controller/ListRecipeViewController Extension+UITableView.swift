@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Table view data source
-extension ListRecipeViewController: UITableViewDataSource {
+extension ListRecipeViewController: UITableViewDataSource, VCUtilities {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -23,6 +23,9 @@ extension ListRecipeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
+
+        cell.cellDelegate = self
+
         let recipe = self.recipes![indexPath.row]
 
         cell.titleRecipe.text = recipe.name
@@ -32,11 +35,8 @@ extension ListRecipeViewController: UITableViewDataSource {
 
         cell.time.text = String(recipe.time)
         cell.yield.text = String(recipe.portion)
-        if recipe.favorite {
-            setToGreen(button: cell.favorite)
-        } else {
-            setToWhite(button: cell.favorite)
-        }
+
+        refreshFavoriteColor(button: cell.favorite, recipe: recipe)
         return cell
     }
 }

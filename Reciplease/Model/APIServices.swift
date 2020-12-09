@@ -26,30 +26,15 @@ class APIServices {
                         return
                     }
                     completionHandler(nil, apiData )
-                case .failure:
-                    completionHandler(Utilities.ManageError.httpResponseError, nil)
                     return
+                case .failure(let error):
+                    switch error {
+                    case .responseValidationFailed:
+                        completionHandler(Utilities.ManageError.apiRestriction, nil)
+                    default:
+                        completionHandler(Utilities.ManageError.httpResponseError, nil)
+                    }
                 }
             }
-    }
-
-    static func getRawData (
-        _ endpointApi: URL,
-        _ parameters: [String:String?],
-        completionHandler : @escaping ( Utilities.ManageError?, Data?) -> Void) {
-        AF.request(endpointApi, method: .get, parameters: parameters).response {(response) in
-
-            switch response.result {
-            case .success:
-                guard let rawData = response.data else {
-                    completionHandler(Utilities.ManageError.incorrectDataStruct,nil )
-                    return
-                }
-                completionHandler(nil, rawData )
-            case .failure:
-                completionHandler(Utilities.ManageError.httpResponseError, nil)
-                return
-            }
-        }
     }
 }

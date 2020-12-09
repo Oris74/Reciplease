@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ListRecipeViewController: UIViewController, VCUtilities {
+class ListRecipeViewController: UIViewController {
+
     var recipes:[RecipleaseStruct]!
     var indexSelectedRow = NSIndexPath()
 
@@ -23,14 +24,12 @@ class ListRecipeViewController: UIViewController, VCUtilities {
         tableview.reloadData()
         super.viewWillAppear(animated)
     }
-}
 
-extension ListRecipeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToDetailledRecipe" {
             let recipeVC = segue.destination as! RecipeViewController
             if let selectedRecipe = self.tableview.indexPathForSelectedRow {
-                recipeVC.ListRecipeDelegate = self
+                recipeVC.delegate = self
                 recipeVC.recipe = recipes[selectedRecipe.row]
             } else { return }
         }

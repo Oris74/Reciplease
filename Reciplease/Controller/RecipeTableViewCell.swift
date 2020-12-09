@@ -8,6 +8,7 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
+    weak var cellDelegate: PassDataToVC?
 
     @IBOutlet weak var titleRecipe: UILabel!
     @IBOutlet weak var detailRecipe: UILabel!
@@ -15,7 +16,10 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var yield: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var favorite: UIButton!
-    
+
+    @IBAction func favoriteButton(_ sender: UIButton) {
+        cellDelegate?.didButtonPressed(cell: self)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

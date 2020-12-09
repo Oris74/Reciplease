@@ -9,6 +9,7 @@ import Foundation
 class Utilities {
     enum ManageError: String, Error {
         case apiKeyError = "Clef API non recupéré"
+        case apiRestriction = "Requete API limitée à 5 par minute"
         case emptyText = "veuillez saisir un ou plusieurs ingredients séparés par une virgule"
         case decodableIssue = "Recette non récupérable"
         case httpResponseError = "Réponse incorrect du serveur"
