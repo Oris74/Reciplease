@@ -86,8 +86,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-Up-VaE" userLabel="ImageRecipe">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="371" id="0xJ-WE-qgi"/>
-                                                        <constraint firstAttribute="height" constant="145" id="r5k-62-bxr"/>
+                                                        <constraint firstAttribute="height" priority="998" constant="150" id="r5k-62-bxr"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aHf-m0-doD">
@@ -573,25 +572,8 @@
                     <view key="view" contentMode="scaleToFill" id="Vlc-AX-JAS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsQ-pn-1nH">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" red="0.23847404119999999" green="0.22757455709999999" blue="0.2273393869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="zKH-V8-kWx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="zKH-V8-kWx" firstAttribute="bottom" secondItem="lsQ-pn-1nH" secondAttribute="bottom" id="947-H0-jmm"/>
-                            <constraint firstItem="lsQ-pn-1nH" firstAttribute="top" secondItem="zKH-V8-kWx" secondAttribute="top" id="DZX-2c-w4O"/>
-                            <constraint firstItem="zKH-V8-kWx" firstAttribute="trailing" secondItem="lsQ-pn-1nH" secondAttribute="trailing" id="PIE-6r-exv"/>
-                            <constraint firstItem="lsQ-pn-1nH" firstAttribute="leading" secondItem="zKH-V8-kWx" secondAttribute="leading" id="bio-MS-1Ma"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pGm-ZO-yql">
                         <barButtonItem key="backBarButtonItem" title="Reciplease" id="PZo-tY-Pu5"/>

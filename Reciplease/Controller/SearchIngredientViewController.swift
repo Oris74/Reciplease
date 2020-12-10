@@ -37,6 +37,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
         fridgeContent = FridgeService.shared.fridge.stringOfIngredients
 
         recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
+            sender.isEnabled = true
             self?.toggleActivityIndicator(shown: false)
             guard let recipes = recipesRange else {
                 self?.manageErrors(errorCode: error)
