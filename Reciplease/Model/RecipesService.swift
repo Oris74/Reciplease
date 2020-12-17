@@ -8,9 +8,7 @@
 import Foundation
 
 protocol RecipesService {
-    var  recipes: [RecipleaseStruct] {get set}
 
-    func getRecipes(ingredients: String, callback: @escaping  (Utilities.ManageError?, [RecipleaseStruct]?) -> Void)
-    func getRecipe(idRecipe: String, callback: @escaping  (Utilities.ManageError?, RecipleaseStruct?) -> Void)
-
+    func getRecipes(ingredients: String, callback: @escaping  ([RecipleaseStruct]?, Utilities.ManageError? ) -> Void)
+    func getRecipe(idRecipe: String, callback: @escaping ( RecipleaseStruct?, Utilities.ManageError?) -> Void)
 }

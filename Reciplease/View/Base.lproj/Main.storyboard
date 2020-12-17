@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Dm-wP-Ue4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Dm-wP-Ue4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -141,24 +141,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </stackView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DetailRecipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byF-50-1HB">
-                                                    <rect key="frame" x="30" y="120" width="330" height="20"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DetailRecipe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byF-50-1HB">
+                                                    <rect key="frame" x="32" y="111" width="350" height="38"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="Qiw-dv-PgS"/>
+                                                        <constraint firstAttribute="height" constant="38" id="2q6-V4-wpm"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <size key="shadowOffset" width="2" height="2"/>
-                                                </label>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleRecipe" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="374" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-S1-4bz">
-                                                    <rect key="frame" x="30" y="85" width="350" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="g0D-b8-lEv"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="350" id="w52-bq-fMG"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -176,22 +164,34 @@
                                                         <action selector="favoriteButton:" destination="bHE-oG-UnY" eventType="touchUpInside" id="lqH-Ll-nCD"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleRecipe" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="374" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-S1-4bz">
+                                                    <rect key="frame" x="30" y="68" width="101.5" height="47"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="jRS-wf-mq4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="2" height="2"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="hXL-Up-VaE" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leading" id="47v-rW-9HY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="byF-50-1HB" secondAttribute="bottom" constant="-10" id="8m8-gH-ONa"/>
                                                 <constraint firstAttribute="trailing" secondItem="hXL-Up-VaE" secondAttribute="trailing" id="9VW-ue-Tux"/>
                                                 <constraint firstItem="hXL-Up-VaE" firstAttribute="top" secondItem="JpI-GW-usS" secondAttribute="top" id="Eei-by-5R3"/>
-                                                <constraint firstItem="byF-50-1HB" firstAttribute="top" secondItem="i9J-S1-4bz" secondAttribute="bottom" constant="5" id="I8u-4C-raa"/>
-                                                <constraint firstItem="byF-50-1HB" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="10" id="Ij5-Ep-SpX"/>
                                                 <constraint firstAttribute="bottom" secondItem="hXL-Up-VaE" secondAttribute="bottom" id="QUe-R9-4cA"/>
-                                                <constraint firstItem="i9J-S1-4bz" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="10" id="S6w-pj-VVc"/>
-                                                <constraint firstItem="i9J-S1-4bz" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JpI-GW-usS" secondAttribute="trailingMargin" constant="-34" id="YRO-1t-Aap"/>
+                                                <constraint firstItem="i9J-S1-4bz" firstAttribute="leading" secondItem="TgG-Nn-QAn" secondAttribute="leading" id="T5c-ry-xVW"/>
                                                 <constraint firstAttribute="trailing" secondItem="aHf-m0-doD" secondAttribute="trailing" constant="10" id="btu-LY-vyy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="i9J-S1-4bz" secondAttribute="bottom" constant="24" id="bxh-YU-csk"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i9J-S1-4bz" secondAttribute="trailing" constant="34" id="duh-C8-mLE"/>
                                                 <constraint firstItem="TgG-Nn-QAn" firstAttribute="top" secondItem="JpI-GW-usS" secondAttribute="topMargin" constant="10" id="hwc-IB-HVM"/>
-                                                <constraint firstItem="byF-50-1HB" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JpI-GW-usS" secondAttribute="trailingMargin" constant="-34" id="njJ-Fd-xAp"/>
-                                                <constraint firstAttribute="bottom" secondItem="byF-50-1HB" secondAttribute="bottom" constant="10" id="ooW-AW-jxm"/>
+                                                <constraint firstItem="i9J-S1-4bz" firstAttribute="top" secondItem="aHf-m0-doD" secondAttribute="bottom" constant="8" id="jBN-og-MO8"/>
+                                                <constraint firstItem="byF-50-1HB" firstAttribute="centerX" secondItem="hXL-Up-VaE" secondAttribute="centerX" id="n9U-8A-QC1"/>
+                                                <constraint firstItem="byF-50-1HB" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="12" id="se1-58-tsZ"/>
                                                 <constraint firstItem="TgG-Nn-QAn" firstAttribute="leading" secondItem="JpI-GW-usS" secondAttribute="leadingMargin" constant="10" id="x8H-qS-xzk"/>
                                                 <constraint firstItem="aHf-m0-doD" firstAttribute="top" secondItem="JpI-GW-usS" secondAttribute="top" constant="10" id="yAD-mC-O7P"/>
                                             </constraints>
@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKB-XR-o93" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1113" y="61"/>
+            <point key="canvasLocation" x="-1113.0434782608697" y="60.9375"/>
         </scene>
         <!--SearchIngredient-->
         <scene sceneID="5fI-EC-xqQ">
@@ -405,7 +405,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dbp-15-U1C" userLabel="RecipeImage">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="dbp-15-U1C" userLabel="RecipeImage">
                                 <rect key="frame" x="0.0" y="88" width="414" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Khl-hH-7w1"/>
@@ -464,7 +464,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.27282401919999999" green="0.2596296072" blue="0.25957790019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDL-fF-jZk" userLabel="Title">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDL-fF-jZk" userLabel="Title">
                                 <rect key="frame" x="20" y="289.5" width="374" height="28.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -563,7 +563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5NE-3Z-bx4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-86" y="61"/>
+            <point key="canvasLocation" x="-86.956521739130437" y="60.9375"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="FjQ-Zh-OKz">

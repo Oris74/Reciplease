@@ -21,9 +21,9 @@ extension UIImageView {
                     self?.image = image
                     self?.gradated()
                 }
-            } else {
+            } /*else {
                 self?.image = UIImage(named: "noPhoto.png")
-            }
+            }*/
         }
     }
     func gradated() {

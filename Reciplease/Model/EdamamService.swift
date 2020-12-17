@@ -8,20 +8,30 @@
 import Foundation
 
 final class EdamamService : RecipesService {
-    var recipes = [RecipleaseStruct]()
 
-    static var shared = EdamamService()
+    static let shared = EdamamService()
+
+    private let apiService: APIProtocol
+    private let endPointEdamamUrl = URL(string:"https://api.edamam.com/search?")!
+
+    private var recipes = [RecipleaseStruct]()
 
     private var index = 0
 
-    private let endpointEdamamUrl = URL(string:"https://api.edamam.com/search?")!
-
     private var apiKey = "EDAMAM"
 
-    func getRecipes(ingredients: String, callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
+    private init() {
+        apiService = APIService.shared
+    }
+
+    init(apiService: APIProtocol) {
+        self.apiService =  apiService
+    }
+
+    internal func getRecipes(ingredients: String, callback: @escaping ([RecipleaseStruct]?, Utilities.ManageError?) -> Void) {
         guard let keyEdamamMap = Utilities.getValueForAPIKey(named: apiKey )
         else {
-            callback(Utilities.ManageError.apiKeyError, nil )
+            callback(nil, Utilities.ManageError.apiKeyError)
             return
         }
 
@@ -34,10 +44,10 @@ final class EdamamService : RecipesService {
         ]
         self.recipes = []
 
-        APIServices.getAPIData(
-            endpointEdamamUrl, parameters, Edamam.self, completionHandler: {[weak self] (error, apidata) in
+        apiService.getAPIData(
+            endPointEdamamUrl, parameters, Edamam?.self, completionHandler: {[weak self] (apidata, error ) in
                 guard let depackedAPIData = apidata, let recipeHits = depackedAPIData.hits else {
-                    return callback(error, nil)
+                    return callback(nil, error)
                 }
 
                 for hits in recipeHits {
@@ -52,15 +62,15 @@ final class EdamamService : RecipesService {
                         }
                     }
                 }
-                callback(nil, self?.recipes)
+                callback( self?.recipes, nil)
                 return
             })
     }
 
-    func getRecipe(idRecipe: String, callback: @escaping (Utilities.ManageError?, RecipleaseStruct?) -> Void) {
+    internal func getRecipe(idRecipe: String, callback: @escaping ( RecipleaseStruct?, Utilities.ManageError?) -> Void) {
         guard let keyEdamamMap = Utilities.getValueForAPIKey(named: apiKey )
         else {
-            callback(Utilities.ManageError.apiKeyError, nil )
+            callback(nil,Utilities.ManageError.apiKeyError)
             return
         }
 
@@ -69,18 +79,17 @@ final class EdamamService : RecipesService {
             "app_id": keyEdamamMap["app_id"],
             "app_key": keyEdamamMap["app_key"]
         ]
-        APIServices.getAPIData(
-            endpointEdamamUrl,
+        apiService.getAPIData(
+            endPointEdamamUrl,
             parameters,
-            [Recipe].self,
-            completionHandler: { (error, result) in
+            [Recipe]?.self,
+            completionHandler: { (result, error) in
                 guard let first = result?.first
                 else {
-                    callback(error, nil)
+                    callback( nil, error)
                     return
                 }
-
-                callback(error, self.bridgeEdamam(recipe: first))
+                callback(self.bridgeEdamam(recipe: first), error)
             })
 
     }

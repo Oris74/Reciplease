@@ -17,7 +17,7 @@ class FavoriteNavigationController: UINavigationController, VCUtilities {
             return
         }
         listRecipeVC.recipes = []
-        favoriteService.getRecipes(callback: { [weak self] (error, savedRecipes) in
+        favoriteService.getRecipes(callback: { [weak self] ( savedRecipes, error) in
             guard let depackedRecipes = savedRecipes, depackedRecipes.count > 0 else {
 
                 self?.manageErrors(errorCode: error)

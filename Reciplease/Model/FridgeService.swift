@@ -12,6 +12,14 @@ class FridgeService {
 
     private(set) var fridge = Fridge()
 
+    private init(){
+        transfertIngredientsToFridge()
+    }
+
+ /*   init(fridge: Fridge){
+        self.fridge = fridge
+    }*/
+
     func transfertIngredientsToFridge() {
         let ingredients: [Ingredient] = StoredIngredient.all.map {
             Ingredient(name: $0.name ?? "")

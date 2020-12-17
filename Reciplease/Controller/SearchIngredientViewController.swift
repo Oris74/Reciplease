@@ -9,7 +9,10 @@ import UIKit
 //import CoreData
 
 class SearchIngredientViewController: UIViewController, VCUtilities {
+
     let recipesService: RecipesService = EdamamService.shared
+
+    let fridgeService = FridgeService.shared
 
     private var fridgeContent: String
 
@@ -21,22 +24,22 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     @IBAction func addButtonTapped(_ sender: UIButton) {
 
         guard let ingredient = ingredientField.text else { return }
-        FridgeService.shared.getFoodTapped(new: ingredient)
+        fridgeService.getFoodTapped(new: ingredient)
         ingredientField.text = ""
         dislayFridgeList()
     }
 
     @IBAction func clearButtonTapped(_ sender: UIButton) {
-        FridgeService.shared.cleanFridge()
+        fridgeService.cleanFridge()
         dislayFridgeList()
     }
 
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         sender.isEnabled = false
         toggleActivityIndicator(shown: true)
-        fridgeContent = FridgeService.shared.fridge.stringOfIngredients
+        fridgeContent = fridgeService.fridge.stringOfIngredients
 
-        recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (error, recipesRange) in
+        recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (recipesRange, error) in
             sender.isEnabled = true
             self?.toggleActivityIndicator(shown: false)
             guard let recipes = recipesRange else {
@@ -53,7 +56,6 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
     }
 
     required init?(coder: NSCoder) {
-        FridgeService.shared.transfertIngredientsToFridge()
         self.fridgeContent = ""
         super.init(coder: coder)
     }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Fridge {
     var ingredients: [Ingredient] = []
+    
     var stringOfIngredients: String {
         return ingredients.map {String($0.name)}.joined(separator: ",")
     }

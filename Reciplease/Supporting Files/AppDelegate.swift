@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+                print(storeDescription)
         })
         return container
     }()

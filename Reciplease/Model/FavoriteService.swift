@@ -10,10 +10,9 @@ import Foundation
 class FavoriteService {
     static let shared = FavoriteService()
 
-    //var recipes: [RecipleaseStruct] = []
     let recipesService: RecipesService = EdamamService.shared
 
-    func getRecipes(callback: @escaping (Utilities.ManageError?, [RecipleaseStruct]?) -> Void) {
+    func getRecipes(callback: @escaping ([RecipleaseStruct]?, Utilities.ManageError?) -> Void) {
         var recipes = [RecipleaseStruct]()
         let favorites: [Favorite] = StoredFavorite.all.map {
             Favorite(idRecipe: $0.uri ?? "")
@@ -25,7 +24,7 @@ class FavoriteService {
 
             recipesService.getRecipe(
                 idRecipe:favorite.idRecipe,
-                callback: { (error, recipe) in
+                callback: { (recipe, error) in
                     DispatchQueue.main.async {
                         if var depackedRecipe = recipe {
                             depackedRecipe.favorite = true
@@ -41,7 +40,7 @@ class FavoriteService {
             processingError = .noFavoriteFound
         }
         groupRecipe.notify( queue: DispatchQueue.main) {
-            callback(processingError, recipes)
+            callback(recipes, processingError)
         }
     }
 }

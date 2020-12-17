@@ -6,6 +6,13 @@
 //
 
 import Foundation
+
 struct Ingredient {
     let name: String
+}
+
+extension Ingredient: Equatable {
+    static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
