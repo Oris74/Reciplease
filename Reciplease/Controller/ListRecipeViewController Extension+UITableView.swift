@@ -32,9 +32,9 @@ extension ListRecipeViewController: UITableViewDataSource, VCUtilities {
         cell.detailRecipe.text = recipe.ingredients.joined(separator: ", ")
 
         cell.imageRecipe.load(url: recipe.image ?? "")
-
-        cell.time.text = String(recipe.time)
-        cell.yield.text = String(recipe.portion)
+      
+        cell.time.text = String(recipe.time)+" mn"
+        cell.yield.text = String(recipe.portion)+" p"
 
         refreshFavoriteColor(button: cell.favorite, recipe: recipe)
         return cell

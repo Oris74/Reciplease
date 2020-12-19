@@ -12,4 +12,48 @@ import CoreData
 
 class StoredFavoritesTestCase: XCTestCase {
 
+    override class func tearDown() {
+        StoredFavorite.Delete(idRecipe: "Test")
+    }
+
+    func testStoredFavoriteGivenTestNotStoredWhenTestRecipeIsSavedThenTestISStored() {
+        // Given
+        let newFakeRecipe = "Test"
+        StoredFavorite.isRecorded(idRecipe: newFakeRecipe, completionHandler: {(result) in
+            XCTAssertFalse(result)
+        })
+        // When
+        StoredFavorite.save(recipe: newFakeRecipe)
+
+        //Then
+        StoredFavorite.isRecorded(idRecipe: newFakeRecipe, completionHandler: {(result) in
+            XCTAssertTrue(result)
+        })
+
+    }
+
+    func testStoredFavoriteGivenFavoriteListIsEmptyWhenGetALLFavoriteStoredThenfavoriteListIsNotNull() {
+        // Given
+        let favoriteList: [StoredFavorite]
+        // When
+        favoriteList = StoredFavorite.all
+        // Then
+        XCTAssert(favoriteList.count > 0)
+    }
+
+    func testDeleteStoredFavoriteGivenTestStoredWhenTestRecipeIsDeletedThenTestNotStored() {
+        // Given
+        let newFakeRecipe = "Test"
+        StoredFavorite.save(recipe: newFakeRecipe)
+        StoredFavorite.isRecorded(idRecipe: newFakeRecipe, completionHandler: {(result) in
+            XCTAssertTrue(result)
+        })
+        // When
+        StoredFavorite.Delete(idRecipe: newFakeRecipe)
+
+        //Then
+        StoredFavorite.isRecorded(idRecipe: newFakeRecipe, completionHandler: {(result) in
+            XCTAssertFalse(result)
+        })
+    }
 }

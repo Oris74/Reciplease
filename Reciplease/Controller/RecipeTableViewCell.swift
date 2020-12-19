@@ -9,6 +9,7 @@ import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
     weak var cellDelegate: PassDataToVC?
+    @IBOutlet weak var viewInfo: UIView!
 
     @IBOutlet weak var titleRecipe: UILabel!
     @IBOutlet weak var detailRecipe: UILabel!
@@ -22,7 +23,9 @@ class RecipeTableViewCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.imageRecipe.gradated()
+        self.viewInfo.layer.borderWidth = 1
+        self.viewInfo.layer.borderColor = UIColor.white.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

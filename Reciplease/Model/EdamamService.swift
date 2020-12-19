@@ -16,6 +16,9 @@ final class EdamamService : RecipesService {
 
     private var recipes = [RecipleaseStruct]()
 
+    private var keyEdamamMap: [String:String] {
+        return Utilities.getValueForAPIKey(named: apiKey ) ?? ["":""]
+    }
     private var index = 0
 
     private var apiKey = "EDAMAM"
@@ -29,11 +32,6 @@ final class EdamamService : RecipesService {
     }
 
     internal func getRecipes(ingredients: String, callback: @escaping ([RecipleaseStruct]?, Utilities.ManageError?) -> Void) {
-        guard let keyEdamamMap = Utilities.getValueForAPIKey(named: apiKey )
-        else {
-            callback(nil, Utilities.ManageError.apiKeyError)
-            return
-        }
 
         let parameters = [
             "q": ingredients,
@@ -68,11 +66,6 @@ final class EdamamService : RecipesService {
     }
 
     internal func getRecipe(idRecipe: String, callback: @escaping ( RecipleaseStruct?, Utilities.ManageError?) -> Void) {
-        guard let keyEdamamMap = Utilities.getValueForAPIKey(named: apiKey )
-        else {
-            callback(nil,Utilities.ManageError.apiKeyError)
-            return
-        }
 
         let parameters = [
             "r": idRecipe,
@@ -84,26 +77,21 @@ final class EdamamService : RecipesService {
             parameters,
             [Recipe]?.self,
             completionHandler: { (result, error) in
-                guard let first = result?.first
-                else {
-                    callback( nil, error)
-                    return
-                }
-                callback(self.bridgeEdamam(recipe: first), error)
+                callback(self.bridgeEdamam(recipe: result?.first), error)
             })
-
     }
 
-    private func bridgeEdamam(recipe: Recipe ) -> RecipleaseStruct {
+    private func bridgeEdamam(recipe: Recipe? ) -> RecipleaseStruct? {
+        guard let depackedRecipe = recipe else { return nil }
         let recipeReciplease = RecipleaseStruct.init(
-            id: recipe.uriID,
-            name: recipe.label,
-            image: recipe.image,
-            source: recipe.source,
-            origin: recipe.urlOrigin,
-            portion: recipe.yield,
-            ingredients: recipe.ingredientLines,
-            time: recipe.time
+            id: depackedRecipe.uriID,
+            name: depackedRecipe.label,
+            image: depackedRecipe.image,
+            source: depackedRecipe.source,
+            origin: depackedRecipe.urlOrigin,
+            portion: depackedRecipe.yield,
+            ingredients: depackedRecipe.ingredientLines,
+            time: depackedRecipe.time
         )
         return recipeReciplease
     }

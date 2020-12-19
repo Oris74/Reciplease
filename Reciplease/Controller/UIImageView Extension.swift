@@ -19,20 +19,16 @@ extension UIImageView {
 
                 DispatchQueue.main.async {
                     self?.image = image
-                    self?.gradated()
                 }
-            } /*else {
-                self?.image = UIImage(named: "noPhoto.png")
-            }*/
+            }
         }
     }
     func gradated() {
-        let gradientMaskLayer       = CAGradientLayer()
-        gradientMaskLayer.frame     = bounds
-        gradientMaskLayer.contents = self.image?.cgImage
-        gradientMaskLayer.colors    = [UIColor.green.cgColor, UIColor.blue.cgColor]
-        gradientMaskLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientMaskLayer.endPoint = CGPoint(x: 1, y: 1)
-        self.layer.insertSublayer(gradientMaskLayer, at: 0)
+        let gradientMaskLayer = CAGradientLayer()
+        let initialColor = UIColor.black.withAlphaComponent(0.0).cgColor
+        let finalColor =  UIColor.black.withAlphaComponent(0.9).cgColor
+        gradientMaskLayer.colors = [initialColor,finalColor]
+        gradientMaskLayer.frame = self.frame
+        self.layer.addSublayer(gradientMaskLayer)
     }
 }

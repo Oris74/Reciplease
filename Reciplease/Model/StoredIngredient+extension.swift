@@ -11,16 +11,14 @@ import CoreData
 extension StoredIngredient {
     static var all: [StoredIngredient] {
         let request: NSFetchRequest<StoredIngredient> = StoredIngredient.fetchRequest()
-        guard let goodsInFridge = try? AppDelegate.viewContext.fetch(request) else {
-            return []
-        }
+        guard let goodsInFridge = try? AppDelegate.viewContext.fetch(request) else { return [] }
         return goodsInFridge
     }
 
     static func save(ingredient: Ingredient) {
-          let storedIngredient = StoredIngredient(context: AppDelegate.viewContext)
-                storedIngredient.name = ingredient.name
-            try? AppDelegate.viewContext.save()
+        let storedIngredient = StoredIngredient(context: AppDelegate.viewContext)
+        storedIngredient.name = ingredient.name
+        try? AppDelegate.viewContext.save()
     }
 
     static func clean() {
@@ -28,18 +26,14 @@ extension StoredIngredient {
         // Configure Fetch Request
         request.includesPropertyValues = false
 
-        do {
-            let items = try AppDelegate.viewContext.fetch(request)
-
-            for item in items {
+        let items = try? AppDelegate.viewContext.fetch(request)
+        if let depackedItems = items {
+            for item in depackedItems {
                 AppDelegate.viewContext.delete(item)
             }
 
             // Save Changes
-            try AppDelegate.viewContext.save()
-
-        } catch {
-            print(error)
+            try? AppDelegate.viewContext.save()
         }
     }
 }

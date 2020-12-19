@@ -12,6 +12,7 @@ class RecipeViewController: UIViewController, VCUtilities {
 
     var recipe: RecipleaseStruct!
 
+    @IBOutlet weak var viewInfo: UIView!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var imageRecipe: UIImageView!
     @IBOutlet weak var descriptionRecipe: UITextView!
@@ -27,6 +28,8 @@ class RecipeViewController: UIViewController, VCUtilities {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewInfo.layer.borderWidth = 1
+        self.viewInfo.layer.borderColor = UIColor.white.cgColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,20 +45,6 @@ class RecipeViewController: UIViewController, VCUtilities {
 
         super.viewWillAppear(animated)
     }
-
-   /* private func toggleFavorite() {
-        switch self.recipe.favorite {
-        case false:
-            self.recipe.favorite = true
-            StoredFavorite.save(recipe: self.recipe.id)
-            setToGreen(button: favorite)
-        case true:
-            recipe.favorite = false
-            StoredFavorite.Delete(idRecipe: self.recipe.id)
-            setToWhite(button: favorite)
-        }
-
-    }*/
 }
 
 extension RecipeViewController {

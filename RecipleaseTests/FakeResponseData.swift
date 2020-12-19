@@ -59,34 +59,50 @@ class FakeResponseData {
             bought: false
         )]
     )
+    // MARK: - Response RecipleaseStruct
+    static let responseRecipleaseStructOK = RecipleaseStruct(
+        id: "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
+        name: "Chicken Vesuvio",
+        image: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg",
+        source: "Serious Eats",
+        origin: "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html",
+        portion: Int(4.0),
+        ingredients: [
+            "1/2 cup olive oil",
+            "5 cloves garlic, peeled",
+            "2 large russet potatoes, peeled and cut into chunks",
+            "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
+            "3/4 cup white wine",
+            "3/4 cup chicken stock",
+            "3 tablespoons chopped parsley",
+            "1 tablespoon dried oregano",
+            "Salt and pepper",
+            "1 cup frozen peas, thawed"
+        ],
+        time: Int(60.0),
+        favorite: false
+    )
+
     // MARK: - Response Recipe
     static let responseRecipeOK = Recipe(
-                uriID: "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
-                label: "Chicken Vesuvio",
-                image: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg",
-                source: "Serious Eats",
-                urlOrigin: "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html",
-                yield: Int(4.0),
-                ingredientLines:[
-                        "1/2 cup olive oil",
-                        "5 cloves garlic, peeled",
-                        "2 large russet potatoes, peeled and cut into chunks",
-                        "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
-                        "3/4 cup white wine",
-                        "3/4 cup chicken stock",
-                        "3 tablespoons chopped parsley",
-                        "1 tablespoon dried oregano",
-                        "Salt and pepper",
-                        "1 cup frozen peas, thawed"
-                ],
+        uriID: "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
+        label: "Chicken Vesuvio",
+        image: "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg",
+        source: "Serious Eats",
+        urlOrigin: "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html",
+        yield: Int(4.0),
+        ingredientLines:[
+            "1/2 cup olive oil",
+            "5 cloves garlic, peeled",
+            "2 large russet potatoes, peeled and cut into chunks",
+            "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
+            "3/4 cup white wine",
+            "3/4 cup chicken stock",
+            "3 tablespoons chopped parsley",
+            "1 tablespoon dried oregano",
+            "Salt and pepper",
+            "1 cup frozen peas, thawed"
+        ],
         time: Int(60.0)
-            )
-
-    static let responseKO = HTTPURLResponse(
-        url: URL(string: "http://openclassrooms.com")!,
-        statusCode: 500, httpVersion: nil, headerFields: [:])!
-
-    // MARK: - Error
-    class ErrorClass: Error {}
-    static let error = ErrorClass()
+    )
 }

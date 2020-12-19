@@ -10,15 +10,31 @@ import Foundation
 class FavoriteService {
     static let shared = FavoriteService()
 
-    let recipesService: RecipesService = EdamamService.shared
+    private var recipesService: RecipesService
+    private var favorites: [Favorite] = []
 
-    func getRecipes(callback: @escaping ([RecipleaseStruct]?, Utilities.ManageError?) -> Void) {
-        var recipes = [RecipleaseStruct]()
-        let favorites: [Favorite] = StoredFavorite.all.map {
+    private init() {
+        recipesService = EdamamService.shared
+        refreshFavoritesList()
+    }
+
+    init(recipesService: RecipesService, favorites: [Favorite]) {
+        self.recipesService = recipesService
+        self.favorites = favorites
+    }
+
+    func refreshFavoritesList() {
+        favorites = StoredFavorite.all.map {
             Favorite(idRecipe: $0.uri ?? "")
         }
+    }
+
+    func getFavorites(callback: @escaping ([RecipleaseStruct]?, Utilities.ManageError?) -> Void) {
+        var recipes = [RecipleaseStruct]()
+
         var processingError: Utilities.ManageError?
         let groupRecipe = DispatchGroup()
+
         for favorite in favorites {
             groupRecipe.enter()
 

@@ -39,7 +39,7 @@ class EdamamServicesTestCase: XCTestCase {
         recipesService.getRecipe(idRecipe: idRecipe, callback: { (apiData, errorCode) in
             // Then
             XCTAssertNil(errorCode)
-            XCTAssertNotNil(apiData)
+            XCTAssertEqual(apiData, FakeResponseData.responseRecipleaseStructOK)
             expectation.fulfill()
         })
 

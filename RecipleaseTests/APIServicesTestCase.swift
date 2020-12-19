@@ -12,7 +12,7 @@ class APIServicesTestCase: XCTestCase {
     private var endpointApiForTest = URL(string:"https://api.edamam.com/search?")!
 
     func testgetAPIDataGivenJSONWhenDecodeEdamamThenFailedAPIDecoded() {
-        //given
+        // Given
         let apiService = APIServiceFake(json: FakeResponseData.incorrectData)
         let parameters = [
             "q": "chicken, milk, butter, orange","app_id": "8faa6a6a",
@@ -20,9 +20,10 @@ class APIServicesTestCase: XCTestCase {
             "from": String(0),
             "to": String(10)
         ] as [String : String]
-        //when
+        // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         apiService.getAPIData(endpointApiForTest, parameters, Edamam?.self, completionHandler: { (apidata, error) in
+            // Then
             XCTAssertEqual(error, Utilities.ManageError.incorrectDataStruct)
             XCTAssertNil(apidata)
             expectation.fulfill()

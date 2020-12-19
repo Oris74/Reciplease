@@ -11,9 +11,7 @@ import CoreData
 extension StoredFavorite {
     static var all: [StoredFavorite] {
         let request: NSFetchRequest<StoredFavorite> = StoredFavorite.fetchRequest()
-        guard let favorite = try? AppDelegate.viewContext.fetch(request) else {
-            return []
-        }
+        guard let favorite = try? AppDelegate.viewContext.fetch(request) else { return [] }
         return favorite
     }
 

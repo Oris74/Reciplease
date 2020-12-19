@@ -15,24 +15,40 @@ class FridgeServiceTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         fridgeService = FridgeService.shared
+        fridgeService.cleanFridge()
+        fridgeService.transfertIngredientsToFridge()
+    }
+
+    func find(ingredient searchedIngredient: String, in fridge: [Ingredient]) -> Bool {
+        for ingredient in fridge where searchedIngredient == ingredient.name {
+                return true
+            }
+        return false
     }
 
     func fillFridge(foods: [String]) {
+
+        let ingredientStored = fridgeService.fridge.ingredients
+
         for ingredient in foods {
-            fridgeService.getFoodTapped(new: ingredient)
+            if find(ingredient: ingredient, in: ingredientStored) {
+            } else {
+                fridgeService.getFoodTapped(new: ingredient)
+            }
         }
     }
 
-    func testTransfertIngredientsToFridgeGivenSavedIngredientsWhenRestoreIngredientThenFridgeIsFull() {
+   func testTransfertIngredientsToFridgeGivenSavedIngredientsWhenRestoreIngredientThenFridgeIsFull() {
         // Given
-        fillFridge(foods: ["Chicken", "Cheese", "Sausage"])
+        fillFridge(foods: ["Ingredient1", "Ingredient2", "Ingredient3"])
 
-        let arrayOfIngredients = [Ingredient(name: "Chicken"),
-            Ingredient(name: "Cheese"),
-            Ingredient(name: "Sausage")
+        let arrayOfIngredients = [Ingredient(name: "Ingredient1"),
+            Ingredient(name: "Ingredient2"),
+            Ingredient(name: "Ingredient3")
         ]
         // When
         fridgeService.transfertIngredientsToFridge()
+
         // Then
         XCTAssertEqual(fridgeService.fridge.ingredients, arrayOfIngredients)
     }
@@ -40,10 +56,10 @@ class FridgeServiceTestCase: XCTestCase {
     ///Getting ingredients from text field to store them into the fridge
     func testGetFoodTappedGivenTappedIngredientWhenProcessingThenIngredientsAreInFridge() {
         // Given
-        let foods = "Chicken, Cheese, Sausage"
-        let arrayOfIngredients = [Ingredient(name: "Chicken"),
-            Ingredient(name: "Cheese"),
-            Ingredient(name: "Sausage")
+        let foods = "Ingredient1, Ingredient2, Ingredient3"
+        let arrayOfIngredients = [Ingredient(name: "Ingredient1"),
+            Ingredient(name: "Ingredient2"),
+            Ingredient(name: "Ingredient3")
         ]
         // When
         fridgeService.getFoodTapped(new: foods)
@@ -52,21 +68,22 @@ class FridgeServiceTestCase: XCTestCase {
         XCTAssertEqual(fridgeService.fridge.ingredients, arrayOfIngredients)
     }
 
-    internal func testCleanFridgeGivenIngredientInFridgeWhenProcessingThenFridgeIsEmpty() {
+    func testCleanFridgeGivenIngredientInFridgeWhenProcessingThenFridgeIsEmpty() {
+
         // Given
-        fillFridge(foods: ["Chicken", "Cheese", "Sausage"])
+        fillFridge(foods: ["Ingredient1", "Ingredient2", "Ingredient3"])
         // When
         fridgeService.cleanFridge()
         // Then
         XCTAssertEqual(fridgeService.fridge.ingredients, [])
     }
+
     func testStringOfIngredientsGivenFridgeThenReturnStringOfIngredient() {
         // Given
-        //fillFridge(foods: ["Chicken", "Cheese", "Sausage"])
+        fillFridge(foods: ["Ingredient1", "Ingredient2", "Ingredient3"])
         // When
         let requeteOfIngredient = fridgeService.fridge.stringOfIngredients
         // Then
-        XCTAssertEqual(requeteOfIngredient, "Chicken,Cheese Sausage")
+        XCTAssertEqual(requeteOfIngredient, "Ingredient1,Ingredient2,Ingredient3")
     }
-
 }

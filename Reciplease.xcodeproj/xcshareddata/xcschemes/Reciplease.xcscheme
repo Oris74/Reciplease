@@ -39,16 +39,6 @@
                ReferencedContainer = "container:Reciplease.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D9B9FAD72551BACB00A9C5A6"
-               BuildableName = "RecipleaseUITests.xctest"
-               BlueprintName = "RecipleaseUITests"
-               ReferencedContainer = "container:Reciplease.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
