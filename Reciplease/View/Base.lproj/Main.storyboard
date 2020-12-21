@@ -89,6 +89,10 @@
                                                         <constraint firstAttribute="height" priority="998" constant="150" id="r5k-62-bxr"/>
                                                     </constraints>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZvG-nk-9L3">
+                                                    <rect key="frame" x="189" y="55" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuy-ou-nBU">
                                                     <rect key="frame" x="349" y="5" width="60" height="50"/>
                                                     <subviews>
@@ -204,6 +208,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="ZvG-nk-9L3" id="KfF-aa-3yj"/>
                                             <outlet property="detailRecipe" destination="byF-50-1HB" id="nfL-dU-dvT"/>
                                             <outlet property="favorite" destination="TgG-Nn-QAn" id="O7I-aY-ez6"/>
                                             <outlet property="imageRecipe" destination="hXL-Up-VaE" id="wLX-Hr-G38"/>
@@ -420,6 +425,9 @@
                                     <constraint firstAttribute="height" constant="250" id="wqC-IF-i2Q"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Reu-q3-kcu">
+                                <rect key="frame" x="188.5" y="194.5" width="37" height="37"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQa-49-lDh">
                                 <rect key="frame" x="344" y="98" width="60" height="50"/>
                                 <subviews>
@@ -498,7 +506,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EEr-hP-BBj" kind="show" identifier="segueToWebView" id="n8f-oh-aAo"/>
+                                    <segue destination="pd6-5p-fXM" kind="show" identifier="segueToWebView" id="25a-Ed-SXr"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="- 2 1/2 cups bow-tie pasta" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZ8-WZ-PwX" userLabel="IngredientsRecipe">
@@ -533,7 +541,9 @@
                             <constraint firstItem="Rhk-jV-XXd" firstAttribute="trailing" secondItem="HZ8-WZ-PwX" secondAttribute="trailing" id="Iej-hY-VLO"/>
                             <constraint firstItem="XHx-jM-W8P" firstAttribute="centerX" secondItem="p4J-tR-hZZ" secondAttribute="centerX" id="ItT-b6-JWY"/>
                             <constraint firstItem="iDL-fF-jZk" firstAttribute="leading" secondItem="Rhk-jV-XXd" secondAttribute="leading" constant="20" id="TWe-0f-tLI"/>
+                            <constraint firstItem="Reu-q3-kcu" firstAttribute="centerY" secondItem="dbp-15-U1C" secondAttribute="centerY" id="TuK-bO-XmT"/>
                             <constraint firstItem="Rhk-jV-XXd" firstAttribute="trailing" secondItem="ehM-Lv-uW5" secondAttribute="trailing" id="Ykq-kV-vPo"/>
+                            <constraint firstItem="Reu-q3-kcu" firstAttribute="centerX" secondItem="dbp-15-U1C" secondAttribute="centerX" id="aA4-B6-TMU"/>
                             <constraint firstItem="Rhk-jV-XXd" firstAttribute="trailing" secondItem="dbp-15-U1C" secondAttribute="trailing" id="asL-WB-8oS"/>
                             <constraint firstItem="Rhk-jV-XXd" firstAttribute="bottom" secondItem="XHx-jM-W8P" secondAttribute="bottom" constant="10" id="cEY-Dk-t0z"/>
                             <constraint firstItem="dbp-15-U1C" firstAttribute="top" secondItem="Rhk-jV-XXd" secondAttribute="top" id="d99-ss-Uee"/>
@@ -566,6 +576,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="Reu-q3-kcu" id="8Cz-5P-BzV"/>
                         <outlet property="descriptionRecipe" destination="HZ8-WZ-PwX" id="wFc-zf-uno"/>
                         <outlet property="favorite" destination="p9c-uR-6Ju" id="5Pi-3i-fO3"/>
                         <outlet property="imageRecipe" destination="dbp-15-U1C" id="oJp-hh-1Pb"/>
@@ -580,22 +591,26 @@
             <point key="canvasLocation" x="-86.956521739130437" y="60.9375"/>
         </scene>
         <!--Web View Controller-->
-        <scene sceneID="FjQ-Zh-OKz">
+        <scene sceneID="1ct-bC-wLD">
             <objects>
-                <viewController id="EEr-hP-BBj" customClass="WebViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vlc-AX-JAS">
+                <viewController id="pd6-5p-fXM" customClass="WebViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1CB-q2-wWu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="zKH-V8-kWx"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="4V1-Rl-RcJ">
+                                <rect key="frame" x="189" y="430" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DUB-GC-cIZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pGm-ZO-yql">
-                        <barButtonItem key="backBarButtonItem" title="Reciplease" id="PZo-tY-Pu5"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Tj5-hg-pdo"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k5M-FN-nn6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="28q-mu-5OW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="986" y="61"/>
+            <point key="canvasLocation" x="952" y="69"/>
         </scene>
         <!--SearchNavigation-->
         <scene sceneID="Cfu-Uz-LVr">

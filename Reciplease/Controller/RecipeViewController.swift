@@ -12,6 +12,7 @@ class RecipeViewController: UIViewController, VCUtilities {
 
     var recipe: RecipleaseStruct!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewInfo: UIView!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var imageRecipe: UIImageView!
@@ -33,10 +34,9 @@ class RecipeViewController: UIViewController, VCUtilities {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
         titleRecipe.text = recipe.name
         timeRecipe.text = String(recipe.time)
-        imageRecipe.load(url: recipe.image ?? "")
+        imageRecipe.load(url: recipe.image ?? "", activity: activityIndicator)
         descriptionRecipe.text = recipe.ingredients.map { " - " + String($0)}.joined(separator: "\n")
         yieldRecipe.text = String(recipe.portion)
         timeRecipe.text = String(recipe.time)

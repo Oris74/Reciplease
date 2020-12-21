@@ -37,11 +37,3 @@ class APIService: APIProtocol {
             })
     }
 }
-
-protocol APIProtocol {
-  func getAPIData<T:  Decodable>(
-        _ endpointApi: URL,
-        _ parameters: [String:String?],
-        _ apiStruct: T?.Type,
-        completionHandler : @escaping (T?, Utilities.ManageError?) -> Void)
-}

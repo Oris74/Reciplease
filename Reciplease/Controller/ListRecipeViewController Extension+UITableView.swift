@@ -31,7 +31,7 @@ extension ListRecipeViewController: UITableViewDataSource, VCUtilities {
         cell.titleRecipe.text = recipe.name
         cell.detailRecipe.text = recipe.ingredients.joined(separator: ", ")
 
-        cell.imageRecipe.load(url: recipe.image ?? "")
+        cell.imageRecipe.load(url: recipe.image ?? "", activity: cell.activityIndicator)
 
         cell.time.text = String(recipe.time)+" mn"
         cell.yield.text = String(recipe.portion)+" p"

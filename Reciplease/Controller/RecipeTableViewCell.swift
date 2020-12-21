@@ -9,8 +9,11 @@ import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
     weak var cellDelegate: PassDataToVC?
+
     @IBOutlet weak var viewInfo: UIView!
 
+
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleRecipe: UILabel!
     @IBOutlet weak var detailRecipe: UILabel!
     @IBOutlet weak var imageRecipe: UIImageView!

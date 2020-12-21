@@ -8,17 +8,19 @@
 import UIKit
 
 extension UIImageView {
-    func load(url: String) {
+    func load(url: String, activity: UIActivityIndicatorView) {
         let photoURL = URL(string: url)
         guard let depackedPhotoURL = photoURL else {
             return self.image = UIImage(named: "noPhoto.png")
         }
+        activity.isHidden = false
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: depackedPhotoURL),
                let image = UIImage(data: data) {
 
                 DispatchQueue.main.async {
                     self?.image = image
+                    activity.isHidden = true
                 }
             }
         }

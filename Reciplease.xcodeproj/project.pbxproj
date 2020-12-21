@@ -14,6 +14,7 @@
 		D9233CF6255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */; };
 		D9233CFE25598EBE00B96C32 /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233CFD25598EBE00B96C32 /* Fridge.swift */; };
 		D9233D09255997E100B96C32 /* VCUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9233D08255997E100B96C32 /* VCUtilities.swift */; };
+		D92EA2932590AD960085FAEA /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92EA2922590AD960085FAEA /* APIProtocol.swift */; };
 		D92FA4B1255B03DF00570372 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92FA4B0255B03DF00570372 /* Ingredient.swift */; };
 		D92FA4B7255B067000570372 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D92FA4B5255B067000570372 /* Reciplease.xcdatamodeld */; };
 		D92FA4BC255B07AD00570372 /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92FA4BB255B07AD00570372 /* FridgeService.swift */; };
@@ -95,6 +96,7 @@
 		D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchIngredientViewController+UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		D9233CFD25598EBE00B96C32 /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
 		D9233D08255997E100B96C32 /* VCUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCUtilities.swift; sourceTree = "<group>"; };
+		D92EA2922590AD960085FAEA /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		D92FA4B0255B03DF00570372 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		D92FA4B6255B067000570372 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		D92FA4BB255B07AD00570372 /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FridgeService.swift; path = Reciplease/Model/FridgeService.swift; sourceTree = SOURCE_ROOT; };
@@ -451,6 +453,7 @@
 				D950F277255D7E0A007B74E6 /* APIService.swift */,
 				D97C195825894F7500189795 /* JSON.swift */,
 				D9F979362564432B00F304F4 /* RecipesService.swift */,
+				D92EA2922590AD960085FAEA /* APIProtocol.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				D97C18D12580DFDA00189795 /* ListRecipeVC Extension+PassDataToVC Protocol.swift in Sources */,
 				D92FA4B1255B03DF00570372 /* Ingredient.swift in Sources */,
 				D96D41DB258D05D800014A13 /* RecipleaseStruct+Equitable.swift in Sources */,
+				D92EA2932590AD960085FAEA /* APIProtocol.swift in Sources */,
 				D96D413B258BB45A00014A13 /* Edamam+Equitable.swift in Sources */,
 				D9233CF6255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift in Sources */,
 				D97C195925894F7500189795 /* JSON.swift in Sources */,

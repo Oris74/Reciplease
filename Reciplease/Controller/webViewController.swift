@@ -8,15 +8,15 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController, WKUIDelegate {
+class WebViewController:  UIViewController, WKNavigationDelegate {
 
     var webView: WKWebView!
+
     var recipeURL: String?
 
     override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
+        webView = WKWebView()
+        webView.navigationDelegate = self
         view = webView
     }
 
@@ -26,15 +26,21 @@ class WebViewController: UIViewController, WKUIDelegate {
 
         let originURL = URL(string: depackedRecipeURL)!
         let myRequest = URLRequest(url: originURL)
-        DispatchQueue.main.async {        self.webView.load(myRequest)
+        DispatchQueue.main.async { 
+            self.webView.load(myRequest)
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    internal func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         webView.stopLoading()
-        webView.configuration.userContentController.removeScriptMessageHandler(forName: "...")
-        webView.uiDelegate = nil
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+
+        webView.stopLoading()
+        webView.navigationDelegate = nil
+    }
+
     deinit {
         view = UIView()
         webView = nil
