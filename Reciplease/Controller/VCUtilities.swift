@@ -55,4 +55,8 @@ extension VCUtilities {
             button.tintColor = UIColor(named:"white")
         }
     }
+
+    internal func toggleActivityIndicator(activity: UIActivityIndicatorView ,shown: Bool) {
+        activity.isHidden = !shown
+    }
 }

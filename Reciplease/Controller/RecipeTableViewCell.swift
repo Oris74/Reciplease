@@ -12,7 +12,6 @@ class RecipeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var viewInfo: UIView!
 
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleRecipe: UILabel!
     @IBOutlet weak var detailRecipe: UILabel!

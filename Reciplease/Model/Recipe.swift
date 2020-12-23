@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - Recipe
+///API Edamam.com Struct Recipe
 struct Recipe: Codable {
     var uriID: String
     var label: String

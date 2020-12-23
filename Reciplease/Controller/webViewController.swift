@@ -26,7 +26,7 @@ class WebViewController:  UIViewController, WKNavigationDelegate {
 
         let originURL = URL(string: depackedRecipeURL)!
         let myRequest = URLRequest(url: originURL)
-        DispatchQueue.main.async { 
+        DispatchQueue.main.async {
             self.webView.load(myRequest)
         }
     }

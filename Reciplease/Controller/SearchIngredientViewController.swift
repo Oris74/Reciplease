@@ -10,9 +10,7 @@ import UIKit
 
 class SearchIngredientViewController: UIViewController, VCUtilities {
 
-    let recipesService: RecipesService = EdamamService.shared
-
-    let fridgeService = FridgeService.shared
+    internal let fridgeService = FridgeService.shared
 
     private var fridgeContent: String
 
@@ -36,12 +34,12 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
 
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         sender.isEnabled = false
-        toggleActivityIndicator(shown: true)
+        toggleActivityIndicator(activity: activityIndicator, shown: true)
         fridgeContent = fridgeService.fridge.stringOfIngredients
 
-        recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (recipesRange, error) in
+        EdamamService.shared.getRecipes(ingredients: fridgeContent, callback: {[weak self] (recipesRange, error) in
             sender.isEnabled = true
-            self?.toggleActivityIndicator(shown: false)
+            self?.toggleActivityIndicator(activity: self!.activityIndicator, shown: false)
             guard let recipes = recipesRange else {
                 self?.manageErrors(errorCode: error)
                 return
@@ -62,28 +60,24 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
 
     override func viewDidLoad() {
         self.ingredientField.delegate = self
-        toggleActivityIndicator(shown: false)
+        toggleActivityIndicator(activity: activityIndicator, shown: false)
         super.viewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         searchButton.isEnabled = true
-        toggleActivityIndicator(shown: false)
+        toggleActivityIndicator(activity: activityIndicator ,shown: false)
         dislayFridgeList()
         super.viewDidAppear(animated)
     }
 
     internal func dislayFridgeList() {
         var ingredientsText = ""
-        let ingredients = FridgeService.shared.fridge.ingredients
+        let ingredients = fridgeService.fridge.ingredients
         for ingredient in ingredients {
             ingredientsText += "- " + ingredient.name + "\n"
         }
         ingredientsList.text = ingredientsText
-    }
-
-    private func toggleActivityIndicator(shown: Bool) {
-        activityIndicator.isHidden = !shown
     }
 
     private func presentList(with recipes: [RecipleaseStruct]) {

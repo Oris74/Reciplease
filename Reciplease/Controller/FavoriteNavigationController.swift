@@ -16,6 +16,7 @@ class FavoriteNavigationController: UINavigationController, VCUtilities {
             self.manageErrors(errorCode: Utilities.ManageError.undefinedError)
             return
         }
+
         listRecipeVC.recipes = []
         favoriteService.refreshFavoritesList()
         favoriteService.getFavorites(callback: { [weak self] ( savedRecipes, error) in

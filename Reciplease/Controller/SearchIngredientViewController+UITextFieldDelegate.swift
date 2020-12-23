@@ -18,7 +18,7 @@ extension SearchIngredientViewController: UITextFieldDelegate {
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let ingredient = ingredientField.text else { return false }
 
-        FridgeService.shared.getFoodTapped(new: ingredient)
+        fridgeService.getFoodTapped(new: ingredient)
         ingredientField.text = ""
         textField.resignFirstResponder()
         dismissKeyboard()

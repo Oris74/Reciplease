@@ -7,7 +7,7 @@
 
 import Foundation
 
-///make Struct Recipe equatable
+///make Struct Edamam equatable
 extension Edamam: Equatable {
     static func == (lhs: Edamam, rhs: Edamam) -> Bool {
         return lhs.query == rhs.query &&
