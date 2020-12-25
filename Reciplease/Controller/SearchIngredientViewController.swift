@@ -11,6 +11,7 @@ import UIKit
 class SearchIngredientViewController: UIViewController, VCUtilities {
 
     internal let fridgeService = FridgeService.shared
+    private let recipesService: RecipesService
 
     private var fridgeContent: String
 
@@ -37,7 +38,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
         toggleActivityIndicator(activity: activityIndicator, shown: true)
         fridgeContent = fridgeService.fridge.stringOfIngredients
 
-        EdamamService.shared.getRecipes(ingredients: fridgeContent, callback: {[weak self] (recipesRange, error) in
+        recipesService.getRecipes(ingredients: fridgeContent, callback: {[weak self] (recipesRange, error) in
             sender.isEnabled = true
             self?.toggleActivityIndicator(activity: self!.activityIndicator, shown: false)
             guard let recipes = recipesRange else {
@@ -55,6 +56,7 @@ class SearchIngredientViewController: UIViewController, VCUtilities {
 
     required init?(coder: NSCoder) {
         self.fridgeContent = ""
+        recipesService = EdamamService.shared
         super.init(coder: coder)
     }
 

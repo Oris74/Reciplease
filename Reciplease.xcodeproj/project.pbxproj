@@ -384,8 +384,8 @@
 		D9D61E83256AE82400870D77 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */,
 				D93990042558042D009ED81C /* SearchIngredientViewController.swift */,
+				D9233CF5255986E300B96C32 /* SearchIngredientViewController+UITextFieldDelegate.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -411,8 +411,8 @@
 		D9D9CB452552A0480026C975 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D97C18DB2580E05F00189795 /* ListRecipes */,
 				D9D61E83256AE82400870D77 /* Search */,
+				D97C18DB2580E05F00189795 /* ListRecipes */,
 				D9233D072559977400B96C32 /* ViewControllerUtilities */,
 				D9D61E84256AE87100870D77 /* recipe */,
 				D96EF2B5256E9B8F00DE8A97 /* FavoriteNavigationController.swift */,

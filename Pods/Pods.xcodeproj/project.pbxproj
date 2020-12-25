@@ -263,8 +263,8 @@
 		331C855DC4CAB3ACA1E3414304CF2C77 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5D074FB5714CB9A224E1D7D517634825 /* Alamofire */,
 				4F320875DCB0F34EF7ED8429A696ED35 /* SwiftLint */,
+				5D074FB5714CB9A224E1D7D517634825 /* Alamofire */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
