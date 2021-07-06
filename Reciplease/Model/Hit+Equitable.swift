@@ -10,8 +10,6 @@ import Foundation
 ///make Struct Hit equatable
 extension Hit: Equatable {
     static func == (lhs: Hit, rhs: Hit) -> Bool {
-        return lhs.recipeHits == rhs.recipeHits &&
-            lhs.bookmarked == rhs.bookmarked &&
-            lhs.bought == rhs.bought
+        return lhs.recipeHits == rhs.recipeHits
     }
 }

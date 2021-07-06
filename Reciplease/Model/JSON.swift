@@ -17,11 +17,36 @@ class JSON {
         data: Data?,
         completion: @escaping (T?, Utilities.ManageError?) -> Void) {
 
-        guard let decodedData = try? JSONDecoder().decode(type.self, from: data!)
-            else {
-                completion(nil, .incorrectDataStruct)
-                return
+        #if DEBUG
+        if let data = data {
+            do {
+                let decodedData =  try JSONDecoder().decode(type.self, from: data)
+                return completion(decodedData, nil)
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("\nKey '\(key)' not found:", context.debugDescription)
+                print("\ncodingPath:", context.codingPath)
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("\nValue '\(value)' not found:", context.debugDescription)
+                print("\ncodingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context) {
+                print("\nType '\(type)' mismatch:", context.debugDescription)
+                print("\ncodingPath:", context.codingPath)
+            } catch {
+                print("\nerror: ", error)
+            }
         }
-        return completion(decodedData, nil)
+        #else
+        if let data = data {
+            do {
+                let decodedData =  try JSONDecoder().decode(type.self, from: data)
+                return completion(decodedData, nil)
+            } catch {
+                return completion(nil, Utilities.ManageError.decodableIssue)
+            }
+        }
+        #endif
+        return completion(nil, Utilities.ManageError.incorrectDataStruct)
     }
 }

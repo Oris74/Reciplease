@@ -54,9 +54,7 @@ class FakeResponseData {
                     "Salt"
                 ],
                 time: Int(0.0)
-            ),
-            bookmarked: false,
-            bought: false
+            )
         )]
     )
     // MARK: - Response RecipleaseStruct

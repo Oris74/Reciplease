@@ -19,10 +19,14 @@ class APIService: APIProtocol {
         AF.request(endpointApi, method: .get, parameters: parameters)
             .validate()
             .responseJSON(completionHandler: { response in
+                #if DEBUG
+                    let body = String(data:response.data!, encoding: .utf8)
+                    print(body as Any)
+                #endif
                 switch response.result {
                 case .success:
                     JSON.shared.decodeData(type: apiStruct.self , data: response.data! , completion: {(result, error ) in
-                    completionHandler(result, error)
+                        completionHandler(result, error)
                         return
                     })
 

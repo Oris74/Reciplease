@@ -32,13 +32,14 @@ class StoredFavoritesTestCase: XCTestCase {
 
     }
 
-    func testStoredFavoriteGivenFavoriteListIsEmptyWhenGetALLFavoriteStoredThenfavoriteListIsNotNull() {
+    func testStoredFavoriteGivenFavoriteListIsEmptyWhenGetALLFavoriteStoredThenfavoriteListIsNull() {
         // Given
         let favoriteList: [StoredFavorite]
         // When
         favoriteList = StoredFavorite.all
+        print(favoriteList.count)
         // Then
-        XCTAssert(favoriteList.count > 0)
+        XCTAssert(favoriteList.count == 0)
     }
 
     func testDeleteStoredFavoriteGivenTestStoredWhenTestRecipeIsDeletedThenTestNotStored() {

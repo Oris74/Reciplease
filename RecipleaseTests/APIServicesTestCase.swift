@@ -24,7 +24,7 @@ class APIServicesTestCase: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         apiService.getAPIData(endpointApiForTest, parameters, Edamam?.self, completionHandler: { (apidata, error) in
             // Then
-            XCTAssertEqual(error, Utilities.ManageError.incorrectDataStruct)
+            XCTAssertEqual(error, Utilities.ManageError.decodableIssue)
             XCTAssertNil(apidata)
             expectation.fulfill()
         })

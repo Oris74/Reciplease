@@ -10,11 +10,8 @@ import Foundation
 // MARK: - Hit
 struct Hit: Codable {
     let recipeHits: Recipe?
-    let bookmarked, bought: Bool
 
     enum CodingKeys: String, CodingKey {
         case recipeHits = "recipe"
-        case bookmarked
-        case bought
     }
 }
