@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class EdamamService : RecipesService {
+final class EdamamService: RecipesService {
 
     static let shared = EdamamService()
 

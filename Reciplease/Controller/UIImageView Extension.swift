@@ -20,6 +20,7 @@ extension UIImageView {
 
                 DispatchQueue.main.async {
                     self?.image = image
+
                     activity.isHidden = true
                 }
             }
